@@ -44,3 +44,20 @@
 
   --links-gap: 3rem;
 }
+
+// Temporary in order to avoid interferences from other pacages
+.crash {
+  --primary: #{$primary};
+  --primary-light: #{$primary-300};
+  --border-color: #{$border-color};
+  --card-bg: #{$card-bg};
+  --black: #{$black};
+  --light: #{$light};
+  --secondary: #{$secondary};
+  --card-bg: #{$card-bg};
+  --border-color: #{$border-color};
+  --warning: #{$warning};
+  --btn-blue: #{$primary};
+  --brown: #{$neutral-700};
+  --link-hover-color: #{$link-hover-color};
+}

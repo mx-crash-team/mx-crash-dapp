@@ -1,6 +1,6 @@
 import { DECIMALS } from '@multiversx/sdk-dapp/constants/index';
 import { getEgldLabel } from '@multiversx/sdk-dapp/utils/network/getEgldLabel';
-import { SelectOptionType } from 'pages/Home/components/AmountSelectInput/types';
+import { SelectOptionType } from 'components/Deposit/AmountSelectInput/types';
 
 import { PartialEsdtType } from 'types';
 

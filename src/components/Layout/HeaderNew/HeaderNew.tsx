@@ -4,7 +4,7 @@ import { Navbar } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as Logo } from 'assets/images/logo-color.svg';
-import { UnlockBtn } from 'components';
+import { Deposit, UnlockBtn } from 'components';
 import { useLogout, useIsAuthenticated } from 'hooks';
 import { routeNames } from 'routes';
 
@@ -63,7 +63,7 @@ export const HeaderNew = () => {
                 </div>
               </div>
               <div className='d-none d-md-inline-block'>
-                {isAuthenticated ? <></> : <UnlockBtn />}
+                {isAuthenticated ? <Deposit /> : <UnlockBtn />}
               </div>
             </div>
           </div>

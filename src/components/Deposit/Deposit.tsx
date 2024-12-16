@@ -3,9 +3,9 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { Modal } from 'react-bootstrap';
 
-import { Deposit } from './Deposit';
+import { DepositForm } from './DepositForm';
 
-export const DepositModal = ({ className }: WithClassnameType) => {
+export const Deposit = ({ className }: WithClassnameType) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ export const DepositModal = ({ className }: WithClassnameType) => {
             </h6>
           </Modal.Header>
           <Modal.Body className='p-1 p-md-3 shadow deposit-modal'>
-            <Deposit />
+            <DepositForm />
           </Modal.Body>
         </Modal>
       )}

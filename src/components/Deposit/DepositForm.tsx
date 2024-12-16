@@ -1,6 +1,6 @@
 import { InteractionForm } from './InteractionForm';
 
-export const Deposit = () => {
+export const DepositForm = () => {
   return (
     <div className='deposit'>
       <div className='card'>

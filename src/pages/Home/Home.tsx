@@ -1,5 +1,4 @@
 import { Chart, Interface, Table } from './components';
-import { DepositModal } from './components/DepositModal';
 
 export const Home = () => {
   return (
@@ -11,7 +10,6 @@ export const Home = () => {
             <Table />
           </div>
           <div className='col-4 flex-grow-1'>
-            <DepositModal />
             <Interface />
           </div>
         </div>
