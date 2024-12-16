@@ -1,3 +1,5 @@
+@import './rocketAnimation.styles.scss';
+
 .chart {
   border-radius: $card-border-radius;
   font-family: $headings-font-family;
@@ -27,6 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     h2 {
       display: flex;
       align-items: center;

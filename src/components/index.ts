@@ -4,7 +4,6 @@ export * from './Confetti';
 export * from './FormatValue/FormatBalance';
 export * from './FormatValue';
 export * from './ImageParticles';
-export * from './Deposit';
 
 export * from './Layout';
 export * from './Loader';

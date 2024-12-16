@@ -1,9 +1,11 @@
 import React from 'react';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
 import { BigNumber } from 'bignumber.js';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 
+import { FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
 
 export const Interface = () => {
@@ -85,9 +87,16 @@ export const Interface = () => {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <small id='amountHelp' className='form-text text-muted'>
-          Text
-        </small>
+        <span id='amountHelp' className=' d-flex align-items-center gap-2'>
+          Available Balance{' '}
+          <FormatAmount
+            value={account?.balance ?? '0'}
+            decimals={DECIMALS}
+            digits={2}
+            showSymbol={false}
+            className='fw-bold'
+          />
+        </span>
       </div>
       <div className='form-group'>
         <label htmlFor='cash_out'>Auto Cashout</label>
