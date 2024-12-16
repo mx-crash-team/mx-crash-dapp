@@ -14,3 +14,8 @@ export const accountIdentitySelector = createDeepEqualSelector(
     account.identity;
   }
 );
+
+export const websocketEventSelector = createDeepEqualSelector(
+  accountInfoSelector,
+  (state) => state.websocketEvent
+);

@@ -9,6 +9,7 @@ import {
   useSetUserAgent,
   useIsAuthenticated
 } from 'hooks';
+import { useWebsocketLog } from 'hooks/websocketListener';
 import routes, { routeNames } from 'routes';
 
 import { Footer } from './Footer';
@@ -27,7 +28,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   // Authenticated
   // useFetchUserInfo();
+
   useFetchUsdValue();
+  useWebsocketLog();
 
   useEffect(() => {
     const receiveMessage = (ev: StorageEvent) => {

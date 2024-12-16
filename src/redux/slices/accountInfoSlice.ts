@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AccountStateType, SetAccountIdentityType } from 'types';
 
 const initialState: AccountStateType = {
-  identity: { isFetched: undefined, identity: undefined }
+  identity: { isFetched: undefined, identity: undefined },
+  websocketEvent: null
 };
 
 export const accountInfoSlice = createSlice({
@@ -17,10 +18,20 @@ export const accountInfoSlice = createSlice({
       action: PayloadAction<SetAccountIdentityType>
     ) => {
       state.identity = action.payload;
+    },
+    setWebsocketEvent: (
+      state: AccountStateType,
+      action: PayloadAction<string>
+    ) => {
+      state.websocketEvent = {
+        timestamp: Date.now(),
+        message: action.payload
+      };
     }
   }
 });
 
-export const { resetState, setAccountIdentity } = accountInfoSlice.actions;
+export const { resetState, setAccountIdentity, setWebsocketEvent } =
+  accountInfoSlice.actions;
 
 export default accountInfoSlice.reducer;

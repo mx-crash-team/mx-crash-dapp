@@ -3,6 +3,10 @@ export interface AccountStateType {
     isFetched: boolean | undefined;
     identity: AccountIdentityType | undefined;
   };
+  websocketEvent: {
+    timestamp: number;
+    message: string;
+  } | null;
 }
 
 export interface SetAccountIdentityType {
