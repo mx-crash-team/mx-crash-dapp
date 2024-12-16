@@ -1,0 +1,64 @@
+@import './common/variables/bootstrap-variables';
+
+/* Custom Project Bootstrap Variables
+-------------------------------------------------- */
+
+$btn-border-radius: 0.5rem;
+$btn-border-radius-sm: 0.5rem;
+$btn-border-radius-lg: 0.5rem;
+
+$input-bg: $neutral-800;
+$input-border-radius: 0.5rem;
+$input-border-radius-lg: 0.5rem;
+
+$btn-line-height: 1.5rem;
+$btn-font-size-lg: $font-size-base;
+
+$card-border-radius: 1.5rem;
+$card-spacer-y: 2rem;
+$card-spacer-x: 2rem;
+$card-title-spacer-y: 2rem;
+$card-inner-border-radius: 2rem;
+$card-cap-padding-y: 2rem;
+$card-cap-padding-x: 2rem;
+
+$container-max-widths: (
+  xxl: 1480px
+);
+
+// scss-docs-start theme-color-variables
+$primary: $primary-400;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark,
+  'muted': $muted
+);
+$link-hover-color: $primary;
+
+$form-check-input-bg: $input-bg;
+$form-check-input-focus-border: $input-focus-border-color;
+$form-check-input-focus-box-shadow: $input-btn-focus-box-shadow;
+$form-check-input-checked-color: $component-active-color;
+$form-check-input-checked-bg-color: $component-active-bg;
+$form-check-input-checked-border-color: $form-check-input-checked-bg-color;
+$form-check-input-indeterminate-color: $component-active-color;
+$form-check-input-indeterminate-bg-color: $component-active-bg;
+
+/* Custom Project Variables
+-------------------------------------------------- */
+
+$header-navbar-height: 5rem;
+$header-marquee-height: 1rem;
+$header-wrapper-height: $header-navbar-height;
+
+/* Plugins
+-------------------------------------------------- */

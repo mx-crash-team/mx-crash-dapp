@@ -1,0 +1,63 @@
+.header-user-address {
+  @include media-breakpoint-up(sm) {
+    order: 4;
+    margin-bottom: 0;
+    margin-left: 0;
+    height: 48px;
+    border-radius: 32px;
+  }
+
+  &.header-mobile {
+    display: flex;
+    border-radius: 8px;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &.header-desktop {
+    max-width: 20rem;
+    @include media-breakpoint-up(sm) {
+      display: flex;
+    }
+  }
+
+  .header-user-address-icon {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+  }
+
+  .header-copy {
+    margin-left: auto;
+  }
+
+  .header-account {
+    a {
+      color: var(--neutral-400);
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .header-logout {
+    display: none;
+    .btn-unstyled {
+      color: var(--neutral-400);
+      &:hover {
+        color: var(--primary);
+      }
+    }
+    @include media-breakpoint-up(sm) {
+      display: block;
+    }
+  }
+
+  button {
+    padding: 0;
+  }
+}

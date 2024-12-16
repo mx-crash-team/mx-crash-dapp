@@ -1,0 +1,25 @@
+.unlock-page {
+  .login-btn {
+    @extend .btn-dark;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    .icon-foreground-color {
+      fill: var(--neutral-800);
+    }
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible {
+      .icon-foreground-color {
+        fill: var(--primary);
+      }
+    }
+  }
+}
+
+.modal.unlock-modal {
+  --modal-width: 520px;
+}

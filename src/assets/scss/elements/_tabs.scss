@@ -1,0 +1,33 @@
+.tabs {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  color: var(--neutral-500);
+  .tab {
+    flex-grow: 1;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-family: $headings-font-family;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: var(--neutral-500);
+    border-bottom: 1px solid var(--neutral-500);
+    font-size: 0.825rem;
+    padding: 0.825rem;
+    &:first-of-type {
+      padding-left: 0;
+    }
+    &.active,
+    &:hover {
+      color: var(--project-color);
+      border-bottom-color: var(--project-color);
+    }
+    @include media-breakpoint-up(sm) {
+      font-size: 1rem;
+      padding: 1.25rem;
+    }
+  }
+}

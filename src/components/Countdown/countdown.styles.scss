@@ -1,0 +1,45 @@
+.contract-status-countdown {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--headings-font-family);
+  .time-holder {
+    cursor: default;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.5rem;
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0px;
+    }
+    .digits,
+    .delimiter {
+      font-size: 2rem;
+      line-height: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .digits {
+      color: var(--primary-300);
+      height: 2rem;
+      min-width: 2.5rem;
+    }
+    .delimiter {
+      color: var(--neutral-500);
+    }
+    .legend {
+      color: var(--neutral-500);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+  }
+}
+
+.winner-selection,
+.winners-selected {
+  .contract-status-countdown {
+    .digits {
+      color: var(--yellow-400);
+    }
+  }
+}
