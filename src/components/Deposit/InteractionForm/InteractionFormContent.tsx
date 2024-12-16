@@ -98,13 +98,13 @@ export const InteractionFormContent = (props: any) => {
         </div>
       )}
       <div className='interaction-form-fields'>
-        <label htmlFor={'gasLimit'} className='label'>
+        <label htmlFor='gasLimit' className='label'>
           Deposit Gas Limit
         </label>
         <div className=''>
           <Field
-            id={'gasLimit'}
-            name={'gasLimit'}
+            id='gasLimit'
+            name='gasLimit'
             autoComplete='off'
             type='text'
             onChange={handleChange}
