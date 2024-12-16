@@ -1,4 +1,3 @@
-export * from './BuildersChallenge';
 export * from './CopyButton';
 export * from './Countdown';
 export * from './Confetti';
