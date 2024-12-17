@@ -7,6 +7,7 @@ import { object, string } from 'yup';
 
 import { FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
+import { Claim } from './Claim';
 
 export const Interface = () => {
   const ref = React.useRef(null);
@@ -124,6 +125,7 @@ export const Interface = () => {
       <button type='submit' className='btn btn-primary'>
         Bet
       </button>
+      <Claim />
     </form>
   );
 };
