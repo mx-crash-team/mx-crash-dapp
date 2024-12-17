@@ -34,8 +34,6 @@ dist-ssr
 /apiMock
 
 # Config
-config.ts
-/src/config/index.ts
 /src/interceptors/*
 !/src/interceptors/Interceptor.tsx
 
