@@ -20,7 +20,7 @@ export const Table = () => {
     }
 
     if (message?.message === 'onNewBets') {
-      setBids([message.data, ...bids]);
+      setBids([...message.data, ...bids]);
     }
   };
 
@@ -38,28 +38,19 @@ export const Table = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {bids.map(({ address, bet, cash_out }, index) => {
-                return (
-                  <tr key={`${address}-${index}`}>
-                    <td>
-                      <Trim
-                        text={address}
-                        className='header-user-address-trim'
-                      />
-                    </td>
-                    <td>
-                      <FormatAmount
-                        value={bet}
-                        decimals={DECIMALS}
-                        digits={2}
-                      />
-                    </td>
-                    <td>{formatBigNumber({ value: cash_out / 100 })}</td>
-                  </tr>
-                );
-              })}
-            </tr>
+            {bids.map(({ address, bet, cash_out }, index) => {
+              return (
+                <tr key={`${address}-${index}`}>
+                  <td>
+                    <Trim text={address} className='header-user-address-trim' />
+                  </td>
+                  <td>
+                    <FormatAmount value={bet} decimals={DECIMALS} digits={2} />
+                  </td>
+                  <td>{formatBigNumber({ value: cash_out / 100 })}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

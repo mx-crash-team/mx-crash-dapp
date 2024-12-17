@@ -10,15 +10,23 @@ import { RocketAnimation } from './RocketAnimation';
 export const Chart = ({ className }: WithClassnameType) => {
   const [isOngoing, setIsOngoing] = useState(false);
   const [crashPoint, setCrashPoint] = useState<string | undefined>();
+  const [stage, setStage] = useState('');
 
   const onMessage = (message: any) => {
+    if (
+      message?.data?.status &&
+      ['Ongoing', 'Ended', 'Awarding'].includes(message.data.status) &&
+      message.data.status !== stage
+    ) {
+      setStage(message.data.status);
+    }
     if (message?.data?.status === 'Ongoing') {
       setIsOngoing(true);
       setCrashPoint(undefined);
       return true;
     }
 
-    if (message?.crash_point !== undefined) {
+    if (message?.data?.crash_point !== undefined) {
       const displayCrashPoint = new BigNumber(message.crash_point)
         .dividedBy(100)
         .toFormat(2);
@@ -34,10 +42,10 @@ export const Chart = ({ className }: WithClassnameType) => {
       <div className='chart-particles'>
         <Particles />
       </div>
-      <div className='chart-top'>
+      <div className='chart-top d-flex flex-column'>
+        {stage && <h2 className='h1 mt-3'>{stage}</h2>}
         {isOngoing ? (
           <>
-            <h2 className='h1 mt-3'>Ongoing</h2>
             <RocketAnimation />
           </>
         ) : (
@@ -51,7 +59,7 @@ export const Chart = ({ className }: WithClassnameType) => {
                 <Confetti />
               </>
             ) : (
-              <Loader noText />
+              <Loader />
             )}
           </>
         )}
