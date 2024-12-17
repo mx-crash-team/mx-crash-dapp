@@ -31,7 +31,7 @@ export function useInitializeWebsocketConnection() {
   //const { address } = useGetAccountInfo();
   const dispatch = useDispatch();
 
-  const handleMessageReceived = (message: any, data: any) => {
+  const handleMessageReceived = (message: any, data = {}) => {
     console.log('--got message', message, data);
     if (messageTimeout.current) {
       clearTimeout(messageTimeout.current);

@@ -11,3 +11,4 @@ export * from './useLogout';
 export * from './useMatchPath';
 export * from './useRefreshAccountInfo';
 export * from './useSetUserAgent';
+export * from './useGetClaimableAmount';
