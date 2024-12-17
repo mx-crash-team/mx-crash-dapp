@@ -36,7 +36,10 @@ export const Chart = ({ className }: WithClassnameType) => {
       </div>
       <div className='chart-top'>
         {isOngoing ? (
-          <RocketAnimation />
+          <>
+            <h2 className='h1 mt-3'>Ongoing</h2>
+            <RocketAnimation />
+          </>
         ) : (
           <>
             {crashPoint ? (

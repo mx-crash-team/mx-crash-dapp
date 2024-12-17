@@ -26,6 +26,7 @@ export const Interface = () => {
         const endGame = moment
           .unix(message.init_moment)
           .add(message.duration, 'seconds')
+          .add(18, 'seconds')
           .utc();
 
         setDeadline(endGame.toString());
