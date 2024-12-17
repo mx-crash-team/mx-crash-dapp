@@ -27,6 +27,40 @@
     },
     "endpoints": [
         {
+            "name": "deposit",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "withdraw",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "givePermission",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "permitted_address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "revokePermission",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
             "name": "newGame",
             "onlyOwner": true,
             "mutability": "mutable",
@@ -69,6 +103,32 @@
             ]
         },
         {
+            "name": "contestants",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "available_prize",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
             "name": "submitBet",
             "mutability": "mutable",
             "payableInTokens": [
@@ -78,6 +138,11 @@
                 {
                     "name": "cash_out",
                     "type": "u32"
+                },
+                {
+                    "name": "optional_contestant",
+                    "type": "optional<Address>",
+                    "multi_arg": true
                 }
             ],
             "outputs": []
@@ -95,7 +160,7 @@
             "outputs": []
         },
         {
-            "name": "compute_prizes",
+            "name": "computePrizes",
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
@@ -201,6 +266,18 @@
                 {
                     "name": "nonce",
                     "type": "u32"
+                },
+                {
+                    "name": "duration",
+                    "type": "u64"
+                },
+                {
+                    "name": "init_moment",
+                    "type": "u64"
+                },
+                {
+                    "name": "current_timestamp",
+                    "type": "u64"
                 }
             ]
         },
