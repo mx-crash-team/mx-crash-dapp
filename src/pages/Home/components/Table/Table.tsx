@@ -11,8 +11,9 @@ export const Table = () => {
   const [bids, setBids] = useState<WSBidType[]>([]);
   const onMessage = (message: any) => {
     if (
-      message?.data?.status === 'Awarding' ||
-      message?.data?.status === 'Ended'
+      bids.length > 0 &&
+      (message?.data?.status === 'Awarding' ||
+        message?.data?.status === 'Ended')
     ) {
       setBids([]);
       return;
