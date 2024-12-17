@@ -27,13 +27,14 @@ export function useInitializeWebsocketConnection() {
   //const { address } = useGetAccountInfo();
   const dispatch = useDispatch();
 
-  const handleMessageReceived = (message: any, args: any) => {
+  const handleMessageReceived = (message: any, data: any) => {
+    console.log('--got message', message, data);
     if (messageTimeout.current) {
       clearTimeout(messageTimeout.current);
     }
 
     messageTimeout.current = setTimeout(() => {
-      dispatch(setWebsocketEvent(args));
+      dispatch(setWebsocketEvent({ message, data }));
     }, MESSAGE_DELAY);
   };
 

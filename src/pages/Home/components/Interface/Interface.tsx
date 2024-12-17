@@ -20,13 +20,13 @@ export const Interface = () => {
   const [deadline, setDeadline] = useState<string | undefined>();
 
   const onMessage = (message: any) => {
-    if (message?.status === 'Ongoing') {
+    if (message?.data?.status === 'Ongoing') {
       setCanBet(true);
 
-      if (message?.init_moment && message?.duration && !deadline) {
+      if (message?.data?.init_moment && message?.data?.duration && !deadline) {
         const endGame = moment
-          .unix(message.init_moment)
-          .add(message.duration, 'seconds')
+          .unix(message.data.init_moment)
+          .add(message.data.duration, 'seconds')
           .add(18, 'seconds')
           .utc();
 

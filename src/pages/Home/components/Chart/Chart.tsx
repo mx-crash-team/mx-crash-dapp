@@ -12,7 +12,7 @@ export const Chart = ({ className }: WithClassnameType) => {
   const [crashPoint, setCrashPoint] = useState<string | undefined>();
 
   const onMessage = (message: any) => {
-    if (message?.status === 'Ongoing') {
+    if (message?.data?.status === 'Ongoing') {
       setIsOngoing(true);
       setCrashPoint(undefined);
       return true;

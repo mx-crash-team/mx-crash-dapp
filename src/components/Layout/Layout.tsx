@@ -30,7 +30,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   // useFetchUserInfo();
 
   useFetchUsdValue();
-  useWebsocketLog();
 
   useEffect(() => {
     const receiveMessage = (ev: StorageEvent) => {

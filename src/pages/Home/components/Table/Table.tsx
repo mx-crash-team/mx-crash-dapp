@@ -1,20 +1,29 @@
+import { useState } from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { Trim } from '@multiversx/sdk-dapp/UI';
+
 import { FormatAmount } from 'components';
+import { formatBigNumber } from 'helpers';
 import { useRegisterWebsocketListener } from 'hooks/websocketListener';
 import { WSBidType } from 'types';
 
 export const Table = () => {
-  const bids = [] as WSBidType[];
-  // const onMessage = (message: any) => {
-  //   console.log('---TableMessage', message);
-  //   bids.push({
-  //     address: 'erd1',
-  //     value: '33',
-  //     crash_point: 2
-  //   });
-  // };
-  // useRegisterWebsocketListener(onMessage);
+  const [bids, setBids] = useState<WSBidType[]>([]);
+  const onMessage = (message: any) => {
+    if (
+      message?.data?.status === 'Awarding' ||
+      message?.data?.status === 'Ended'
+    ) {
+      setBids([]);
+      return;
+    }
+
+    if (message?.message === 'onNewBets') {
+      setBids([message.data, ...bids]);
+    }
+  };
+
+  useRegisterWebsocketListener(onMessage);
 
   return (
     <section className='border shadow-sm rounded overflow-hidden '>
@@ -29,7 +38,7 @@ export const Table = () => {
           </thead>
           <tbody>
             <tr>
-              {bids.map(({ address, value, crash_point }, index) => {
+              {bids.map(({ address, bet, cash_out }, index) => {
                 return (
                   <tr key={`${address}-${index}`}>
                     <td>
@@ -40,12 +49,12 @@ export const Table = () => {
                     </td>
                     <td>
                       <FormatAmount
-                        value={value}
+                        value={bet}
                         decimals={DECIMALS}
                         digits={2}
                       />
                     </td>
-                    <td>{crash_point}</td>
+                    <td>{formatBigNumber({ value: cash_out / 100 })}</td>
                   </tr>
                 );
               })}
