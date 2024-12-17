@@ -10,6 +10,7 @@ import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
 import { useRegisterWebsocketListener } from 'hooks/websocketListener';
 import { Claim } from './Claim';
+import { Chat } from '../Chat';
 
 export const Interface = () => {
   const ref = React.useRef(null);
@@ -101,7 +102,7 @@ export const Interface = () => {
       onSubmit={handleSubmit}
       noValidate={true}
       ref={ref}
-      className='d-flex flex-column text-start gap-3'
+      className='d-flex flex-column text-start gap-3 h-100'
     >
       <div className='form-group'>
         <label htmlFor='amount'>Bet Amount</label>
@@ -154,6 +155,7 @@ export const Interface = () => {
       </button>
       <Claim />
       {deadline && <Countdown utcDate={deadline} />}
+      <Chat />
     </form>
   );
 };
