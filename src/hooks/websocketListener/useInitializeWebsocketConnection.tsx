@@ -22,17 +22,18 @@ const DISCONNECT = 'disconnect';
 
 export function useInitializeWebsocketConnection() {
   const messageTimeout = useRef<NodeJS.Timeout | null>(null);
-  const { address } = useGetAccountInfo();
+  const address =
+    'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag';
+  //const { address } = useGetAccountInfo();
   const dispatch = useDispatch();
 
-  const handleMessageReceived = (message: string) => {
-    console.log('--------message', message);
+  const handleMessageReceived = (message: any, args: any) => {
     if (messageTimeout.current) {
       clearTimeout(messageTimeout.current);
     }
 
     messageTimeout.current = setTimeout(() => {
-      dispatch(setWebsocketEvent(message));
+      dispatch(setWebsocketEvent(args));
     }, MESSAGE_DELAY);
   };
 
@@ -57,7 +58,6 @@ export function useInitializeWebsocketConnection() {
         // To avoid multiple connections to the same endpoint, we have to guard the initialization before the logic started
         websocketConnection.status = WebsocketConnectionStatusEnum.PENDING;
 
-        console.log('----websocketConnection', websocketConnection);
         if (websocketUrl == null) {
           console.warn('Can not get websocket url');
           return;
@@ -72,10 +72,6 @@ export function useInitializeWebsocketConnection() {
               'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag'
           }
         });
-        console.log(
-          '----websocketConnection.current',
-          websocketConnection.current
-        );
 
         websocketConnection.status = WebsocketConnectionStatusEnum.COMPLETED;
 

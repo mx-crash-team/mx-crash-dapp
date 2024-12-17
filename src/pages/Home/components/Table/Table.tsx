@@ -6,15 +6,15 @@ import { WSBidType } from 'types';
 
 export const Table = () => {
   const bids = [] as WSBidType[];
-  const onMessage = (message: any) => {
-    console.log('---TableMessage', message);
-    bids.push({
-      address: 'erd1',
-      value: '33',
-      crash_point: 2
-    });
-  };
-  useRegisterWebsocketListener(onMessage);
+  // const onMessage = (message: any) => {
+  //   console.log('---TableMessage', message);
+  //   bids.push({
+  //     address: 'erd1',
+  //     value: '33',
+  //     crash_point: 2
+  //   });
+  // };
+  // useRegisterWebsocketListener(onMessage);
 
   return (
     <section className='border shadow-sm rounded overflow-hidden '>

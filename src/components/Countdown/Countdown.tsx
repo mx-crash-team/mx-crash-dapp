@@ -35,7 +35,7 @@ export const Countdown = ({
         setMinutes(currentDiffDays.minutes());
         setSeconds(currentDiffDays.seconds());
       } else {
-        dispatch(updateRefetch());
+        //dispatch(updateRefetch());
         clearInterval(myInterval);
       }
     }, 1000);

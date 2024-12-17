@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+import BigNumber from 'bignumber.js';
 import { Particles } from 'components';
 import { useRegisterWebsocketListener } from 'hooks/websocketListener';
 import { WithClassnameType } from 'types';
@@ -7,10 +9,23 @@ import { RocketAnimation } from './RocketAnimation';
 
 export const Chart = ({ className }: WithClassnameType) => {
   const [isOngoing, setIsOngoing] = useState(false);
+  const [crashPoint, setCrashPoint] = useState<string | undefined>();
+
   const onMessage = (message: any) => {
-    if (message === 'ceva' && !isOngoing) {
+    if (message?.status === 'Ongoing') {
       setIsOngoing(true);
+      setCrashPoint(undefined);
+      return true;
     }
+
+    if (message?.crash_point !== undefined) {
+      const displayCrashPoint = new BigNumber(message.crash_point)
+        .dividedBy(100)
+        .toFormat(2);
+      setCrashPoint(displayCrashPoint);
+    }
+
+    setIsOngoing(false);
   };
   useRegisterWebsocketListener(onMessage);
 
@@ -24,7 +39,8 @@ export const Chart = ({ className }: WithClassnameType) => {
           <RocketAnimation />
         ) : (
           <h2 className='h1'>
-            1.43<span className='symbol'>✖</span>
+            {crashPoint}
+            <span className='symbol'>✖</span>
           </h2>
         )}
       </div>

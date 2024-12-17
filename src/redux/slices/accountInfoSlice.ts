@@ -21,7 +21,7 @@ export const accountInfoSlice = createSlice({
     },
     setWebsocketEvent: (
       state: AccountStateType,
-      action: PayloadAction<string>
+      action: PayloadAction<any>
     ) => {
       state.websocketEvent = {
         timestamp: Date.now(),

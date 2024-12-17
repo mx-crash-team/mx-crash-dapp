@@ -1,7 +1,7 @@
 import { useRegisterWebsocketListener } from './useRegisterWebsocketListener';
 
 export const useWebsocketLog = () => {
-  const onMessage = (message: string) => {
+  const onMessage = (message: any) => {
     console.log('----', message);
   };
 

@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
 import { BigNumber } from 'bignumber.js';
 import { useFormik } from 'formik';
+import moment from 'moment';
 import { object, string } from 'yup';
 
-import { FormatAmount } from 'components';
+import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
+import { useRegisterWebsocketListener } from 'hooks/websocketListener';
 import { Claim } from './Claim';
 
 export const Interface = () => {
   const ref = React.useRef(null);
   const { account } = useGetAccountInfo();
   const { sendBetTransactionFromAbi } = useSendBetTransaction();
+  const [candBet, setCanBet] = useState(false);
+  const [deadline, setDeadline] = useState<string | undefined>();
+
+  const onMessage = (message: any) => {
+    if (message?.status === 'Ongoing') {
+      setCanBet(true);
+
+      if (message?.init_moment && message?.duration && !deadline) {
+        const endGame = moment
+          .unix(message.init_moment)
+          .add(message.duration, 'seconds')
+          .utc();
+
+        setDeadline(endGame.toString());
+      }
+
+      return;
+    }
+
+    setDeadline(undefined);
+    setCanBet(false);
+  };
+
+  useRegisterWebsocketListener(onMessage);
 
   const onSubmit = async (values: any) => {
     const { amount, cash_out } = values;
     await sendBetTransactionFromAbi({
       amount,
-      cash_out
+      cash_out: cash_out * 100
     });
   };
 
@@ -122,10 +148,11 @@ export const Interface = () => {
           {touched.cash_out && errors.cash_out}
         </div>
       )}
-      <button type='submit' className='btn btn-primary'>
+      <button type='submit' className='btn btn-primary' disabled={!candBet}>
         Bet
       </button>
       <Claim />
+      {deadline && <Countdown utcDate={deadline} />}
     </form>
   );
 };

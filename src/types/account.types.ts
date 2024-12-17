@@ -5,7 +5,7 @@ export interface AccountStateType {
   };
   websocketEvent: {
     timestamp: number;
-    message: string;
+    message: any;
   } | null;
 }
 
