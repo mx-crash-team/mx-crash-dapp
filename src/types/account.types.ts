@@ -7,6 +7,18 @@ export interface AccountStateType {
     timestamp: number;
     message: any;
   } | null;
+  websocketStatus: {
+    timestamp: number;
+    data: any;
+  } | null;
+  websocketNewBets: {
+    timestamp: number;
+    data: any;
+  } | null;
+  websocketChat: {
+    timestamp: number;
+    data: any;
+  } | null;
 }
 
 export interface SetAccountIdentityType {

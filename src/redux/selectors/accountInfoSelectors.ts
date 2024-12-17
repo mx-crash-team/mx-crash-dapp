@@ -19,3 +19,18 @@ export const websocketEventSelector = createDeepEqualSelector(
   accountInfoSelector,
   (state) => state.websocketEvent
 );
+
+export const websocketStatusSelector = createDeepEqualSelector(
+  accountInfoSelector,
+  (state) => state.websocketStatus
+);
+
+export const websocketNewBetsSelector = createDeepEqualSelector(
+  accountInfoSelector,
+  (state) => state.websocketNewBets
+);
+
+export const websocketChatSelector = createDeepEqualSelector(
+  accountInfoSelector,
+  (state) => state.websocketChat
+);

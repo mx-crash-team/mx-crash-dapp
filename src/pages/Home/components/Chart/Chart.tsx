@@ -2,7 +2,10 @@ import { useState } from 'react';
 
 import BigNumber from 'bignumber.js';
 import { Confetti, Loader, Particles } from 'components';
-import { useRegisterWebsocketListener } from 'hooks/websocketListener';
+import {
+  useRegisterWebsocketStatusListener,
+  useRegisterWebsocketEventListener
+} from 'hooks/websocketListener';
 import { WithClassnameType } from 'types';
 
 import { RocketAnimation } from './RocketAnimation';
@@ -20,22 +23,25 @@ export const Chart = ({ className }: WithClassnameType) => {
     ) {
       setStage(message.data.status);
     }
+
     if (message?.data?.status === 'Ongoing') {
       setIsOngoing(true);
       setCrashPoint(undefined);
       return true;
     }
 
+    setIsOngoing(false);
+  };
+  const onEventMessage = (message: any) => {
     if (message?.data?.crash_point !== undefined) {
-      const displayCrashPoint = new BigNumber(message.crash_point)
+      const displayCrashPoint = new BigNumber(message.data.crash_point)
         .dividedBy(100)
         .toFormat(2);
       setCrashPoint(displayCrashPoint);
     }
-
-    setIsOngoing(false);
   };
-  useRegisterWebsocketListener(onMessage);
+  useRegisterWebsocketStatusListener(onMessage);
+  useRegisterWebsocketEventListener(onEventMessage);
 
   return (
     <section className='chart d-flex flex-column h-100'>

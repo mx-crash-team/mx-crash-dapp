@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useGetWebsocketEvent } from './useGetWebsocketEvent';
+import { websocketEventSelector } from 'redux/selectors';
 import { useInitializeWebsocketConnection } from './useInitializeWebsocketConnection';
 
-export function useRegisterWebsocketListener(
-  onMessage: (message: string) => void
+export function useRegisterWebsocketEventListener(
+  onMessage: (message: any) => void
 ) {
   useInitializeWebsocketConnection();
-  const websocketEvent = useGetWebsocketEvent();
+  const websocketEvent = useSelector(websocketEventSelector);
 
   useEffect(() => {
     const message = websocketEvent?.message;

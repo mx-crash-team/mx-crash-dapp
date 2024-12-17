@@ -3,7 +3,10 @@ import { AccountStateType, SetAccountIdentityType } from 'types';
 
 const initialState: AccountStateType = {
   identity: { isFetched: undefined, identity: undefined },
-  websocketEvent: null
+  websocketEvent: null,
+  websocketStatus: null,
+  websocketNewBets: null,
+  websocketChat: null
 };
 
 export const accountInfoSlice = createSlice({
@@ -27,11 +30,41 @@ export const accountInfoSlice = createSlice({
         timestamp: Date.now(),
         message: action.payload
       };
+    },
+    setWebsocketStatus: (
+      state: AccountStateType,
+      action: PayloadAction<any>
+    ) => {
+      state.websocketStatus = {
+        timestamp: Date.now(),
+        data: action.payload
+      };
+    },
+    setWebsocketNewBets: (
+      state: AccountStateType,
+      action: PayloadAction<any>
+    ) => {
+      state.websocketNewBets = {
+        timestamp: Date.now(),
+        data: action.payload
+      };
+    },
+    setWebsocketChat: (state: AccountStateType, action: PayloadAction<any>) => {
+      state.websocketChat = {
+        timestamp: Date.now(),
+        data: action.payload
+      };
     }
   }
 });
 
-export const { resetState, setAccountIdentity, setWebsocketEvent } =
-  accountInfoSlice.actions;
+export const {
+  resetState,
+  setAccountIdentity,
+  setWebsocketEvent,
+  setWebsocketStatus,
+  setWebsocketNewBets,
+  setWebsocketChat
+} = accountInfoSlice.actions;
 
 export default accountInfoSlice.reducer;

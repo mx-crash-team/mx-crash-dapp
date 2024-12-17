@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 
 import { websocketUrl } from 'config';
-import { setWebsocketEvent } from 'redux/slices';
+import {
+  setWebsocketEvent,
+  setWebsocketStatus,
+  setWebsocketNewBets
+} from 'redux/slices';
 
 import {
   websocketConnection,
@@ -15,7 +19,7 @@ import {
 const TIMEOUT = 3000;
 const RECONNECTION_ATTEMPTS = 3;
 const RETRY_INTERVAL = 500;
-const MESSAGE_DELAY = 1000;
+const MESSAGE_DELAY = 600;
 
 const CONNECT = 'connect';
 const DISCONNECT = 'disconnect';
@@ -34,7 +38,16 @@ export function useInitializeWebsocketConnection() {
     }
 
     messageTimeout.current = setTimeout(() => {
-      dispatch(setWebsocketEvent({ message, data }));
+      switch (message) {
+        case 'onGameStatus':
+          dispatch(setWebsocketStatus({ message, data }));
+          return;
+        case 'onNewBets':
+          dispatch(setWebsocketNewBets({ message, data }));
+          return;
+        default:
+          dispatch(setWebsocketEvent({ message, data }));
+      }
     }, MESSAGE_DELAY);
   };
 

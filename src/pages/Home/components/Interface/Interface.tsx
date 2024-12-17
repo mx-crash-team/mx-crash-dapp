@@ -8,7 +8,7 @@ import { object, string } from 'yup';
 
 import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
-import { useRegisterWebsocketListener } from 'hooks/websocketListener';
+import { useRegisterWebsocketStatusListener } from 'hooks/websocketListener';
 import { Claim } from './Claim';
 import { Chat } from '../Chat';
 
@@ -40,7 +40,7 @@ export const Interface = () => {
     setCanBet(false);
   };
 
-  useRegisterWebsocketListener(onMessage);
+  useRegisterWebsocketStatusListener(onMessage);
 
   const onSubmit = async (values: any) => {
     const { amount, cash_out } = values;
