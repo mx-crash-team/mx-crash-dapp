@@ -51,14 +51,12 @@ export const Chart = ({ className }: WithClassnameType) => {
       <div className='chart-top d-flex flex-column'>
         {stage && <h2 className='h1 mt-3'>{stage}</h2>}
         {isOngoing ? (
-          <>
-            <RocketAnimation />
-          </>
+          <RocketAnimation />
         ) : (
           <>
             {crashPoint ? (
               <>
-                <h2 className='h1'>
+                <h2 className='h1 position-absolute m-auto'>
                   {crashPoint}
                   <span className='symbol'>✖</span>
                 </h2>

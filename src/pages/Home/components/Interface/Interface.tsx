@@ -51,8 +51,8 @@ export const Interface = () => {
   };
 
   const initialValues = {
-    amount: 0,
-    cash_out: 0
+    amount: undefined,
+    cash_out: undefined
   };
 
   const validationSchema = object().shape({
