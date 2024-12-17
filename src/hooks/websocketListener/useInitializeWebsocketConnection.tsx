@@ -57,6 +57,7 @@ export function useInitializeWebsocketConnection() {
         // To avoid multiple connections to the same endpoint, we have to guard the initialization before the logic started
         websocketConnection.status = WebsocketConnectionStatusEnum.PENDING;
 
+        console.log('----websocketConnection', websocketConnection);
         if (websocketUrl == null) {
           console.warn('Can not get websocket url');
           return;
@@ -67,27 +68,32 @@ export function useInitializeWebsocketConnection() {
           reconnectionAttempts: RECONNECTION_ATTEMPTS,
           timeout: TIMEOUT,
           query: {
-            address
+            address:
+              'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag'
           }
         });
+        console.log(
+          '----websocketConnection.current',
+          websocketConnection.current
+        );
 
         websocketConnection.status = WebsocketConnectionStatusEnum.COMPLETED;
 
         websocketConnection.current.onAny(handleMessageReceived);
 
         websocketConnection.current.on(CONNECT, () => {
-          console.log('Websocket connected.');
+          console.log('Websocket connected !');
         });
 
         websocketConnection.current.on(DISCONNECT, () => {
           if (address) {
             // Make sure we are still logged in before retrying to connect to the websocket
-            console.warn('Websocket disconnected. Trying to reconnect...');
+            console.warn('Websocket disconnected. Trying to reconnect..!');
 
             setTimeout(() => {
               if (address) {
                 // Make sure we are still logged in when the timeout is finished
-                console.log('Websocket reconnecting...');
+                console.log('Websocket reconnecting..!');
                 websocketConnection.current?.connect();
               }
             }, RETRY_INTERVAL);
