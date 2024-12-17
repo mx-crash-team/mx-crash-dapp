@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import BigNumber from 'bignumber.js';
-import { Particles } from 'components';
+import { Confetti, Loader, Particles } from 'components';
 import { useRegisterWebsocketListener } from 'hooks/websocketListener';
 import { WithClassnameType } from 'types';
 
@@ -38,10 +38,19 @@ export const Chart = ({ className }: WithClassnameType) => {
         {isOngoing ? (
           <RocketAnimation />
         ) : (
-          <h2 className='h1'>
-            {crashPoint}
-            <span className='symbol'>✖</span>
-          </h2>
+          <>
+            {crashPoint ? (
+              <>
+                <h2 className='h1'>
+                  {crashPoint}
+                  <span className='symbol'>✖</span>
+                </h2>
+                <Confetti />
+              </>
+            ) : (
+              <Loader noText />
+            )}
+          </>
         )}
       </div>
     </section>
