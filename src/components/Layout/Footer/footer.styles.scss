@@ -1,0 +1,31 @@
+.footer {
+  width: 100%;
+  background: var(--black);
+  color: var(--neutral-600);
+  .spacer {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 2rem;
+    border-top: 1px solid var(--neutral-800);
+  }
+  .tagline {
+    @include media-breakpoint-up(xl) {
+      max-width: 20rem;
+    }
+  }
+
+  .copyright {
+    min-width: 19rem;
+    margin: 0.4rem 0;
+    font-size: 0.6875rem;
+    font-weight: 200;
+    color: var(--neutral-400);
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+      min-width: auto;
+    }
+  }
+  .version {
+    font-size: 55%;
+  }
+}

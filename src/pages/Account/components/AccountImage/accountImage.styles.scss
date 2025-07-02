@@ -1,0 +1,28 @@
+.account-image {
+  border-radius: 50%;
+  border: 3px solid #fff;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
+  text-align: center;
+  svg {
+    height: 100%;
+    width: auto;
+  }
+  @include media-breakpoint-up(lg) {
+    padding: 1.5rem;
+    width: 5rem;
+    height: 5rem;
+    min-width: 5rem;
+    min-height: 5rem;
+  }
+  @include media-breakpoint-up(xl) {
+    padding: 1.5rem;
+    width: 6.25rem;
+    height: 6.25rem;
+    min-width: 6.25rem;
+    min-height: 6.25rem;
+  }
+}

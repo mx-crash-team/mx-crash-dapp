@@ -1,0 +1,44 @@
+@import './components/Chart/chart.styles.scss';
+@import './components/Table/table.styles.scss';
+@import './components/Chat/chat.styles.scss';
+
+.home {
+  width: 100%;
+  .hero-content {
+    .time-holder {
+      display: none !important;
+    }
+  }
+  .title-holder {
+    .h2 {
+      display: contents;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+    .lead {
+      font-weight: 150;
+      font-size: 1rem;
+    }
+    @include media-breakpoint-up(lg) {
+      .h2 {
+        font-size: 2.125rem;
+      }
+      .lead {
+        font-size: 1.25rem;
+      }
+    }
+    @include media-breakpoint-up(xxl) {
+      .h2 {
+        font-size: 2.5rem;
+      }
+      .lead {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    .title-shadow {
+      min-width: 58rem;
+    }
+  }
+}

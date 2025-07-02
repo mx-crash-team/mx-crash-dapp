@@ -1,0 +1,79 @@
+.user-menu {
+  margin-left: auto;
+  .dropdown-toggle {
+    &::after {
+      display: none;
+    }
+  }
+  .dropdown-divider {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .btn-group {
+    padding: 0.5rem;
+  }
+  .user-address-wrapper {
+    max-width: 8rem;
+    position: relative;
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+    color: var(--body-color);
+    &:after {
+      content: '';
+      top: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      width: 1px;
+      background-color: var(--neutral-500);
+    }
+  }
+  .user-account {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+  }
+  .user-icon {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    border-radius: 50%;
+    font-size: 1rem;
+    color: var(--neutral-100);
+  }
+  .dropdown-menu {
+    --dropdown-padding-x: 0;
+    --dropdown-padding-y: 0;
+  }
+  .menu-item {
+    --link-color: var(--neutral-400);
+    --link-hover-color: var(--neutral-100);
+
+    --dropdown-bg: transparent;
+    --dropdown-link-color: var(--link-color);
+    --dropdown-link-hover-color: var(--link-hover-color);
+    --dropdown-link-active-bg: transparent;
+    --dropdown-link-hover-bg: transparent;
+    --dropdown-item-padding-y: 0;
+    --dropdown-item-padding-x: 0;
+    --dropdown-link-active-color: var(--primary);
+    &:active,
+    &.active {
+      --link-color: var(--primary);
+      --link-hover-color: var(--primary);
+    }
+    &.logout-button {
+      text-align: left;
+      color: var(--link-color);
+      &:hover {
+        color: var(--link-hover-color);
+      }
+    }
+  }
+}

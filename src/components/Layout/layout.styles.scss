@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &.has-marquee {
+    --header-wrapper-height: calc(
+      var(--header-navbar-height) + var(--header-marquee-height)
+    );
+  }
+
+  .main-content {
+    justify-content: center;
+    align-items: center;
+    padding-top: var(--header-wrapper-height);
+    width: 100%;
+  }
+}

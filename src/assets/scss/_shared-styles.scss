@@ -1,0 +1,251 @@
+.btn-link-unstyled {
+  --btn-active-color: inherit;
+  --btn-active-bg: transparent;
+
+  padding: 0;
+  font-size: inherit;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  text-decoration: none;
+  &:focus,
+  &.focus,
+  &:active {
+    box-shadow: none;
+    text-decoration: none;
+  }
+  &:hover {
+    box-shadow: none;
+    text-decoration: none;
+    color: var(--primary);
+  }
+}
+
+.link-style {
+  color: $body-color;
+  text-decoration: underline;
+  &:hover {
+    color: $primary;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+
+  .table {
+    margin: 0;
+    white-space: nowrap;
+  }
+}
+
+.fa-spin.slow-spin {
+  animation-duration: 4s;
+}
+
+.text-break-all {
+  word-break: break-all;
+}
+
+.flex-even {
+  flex: 1;
+}
+
+.step-card {
+  @include media-breakpoint-up(md) {
+    min-width: 400px;
+  }
+}
+
+.circle {
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.rounded-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+
+  &.warning-bg {
+    background-color: lighten($warning, 35%);
+  }
+}
+
+.line-height-1 {
+  line-height: 1;
+}
+
+.position-absolute-center {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.underline-dotted-secondary {
+  border-bottom: 1px $secondary dashed;
+}
+
+.bg-warning-opaque {
+  background-color: rgba($warning, 0.08);
+}
+.bg-success-opaque {
+  background-color: rgba($success, 0.08);
+}
+.bg-danger-opaque {
+  background-color: rgba($danger, 0.15);
+}
+.bg-primary-opaque {
+  background-color: rgba($primary, 0.08);
+}
+
+//One time only specific changes
+.section-table {
+  &.projectroadmapandupdates {
+    th {
+      &:nth-child(1) {
+        width: 21%;
+      }
+      &:nth-child(2) {
+        width: 31%;
+      }
+      &:nth-child(3) {
+        width: 17%;
+      }
+      &:nth-child(5) {
+        width: 17%;
+      }
+    }
+  }
+}
+.section-partners {
+  .partner .partner-logo {
+    &.morningstarventures {
+      margin-bottom: -1.5rem;
+    }
+  }
+}
+.section-icon-list {
+  .details-card {
+    a {
+      display: inline-block;
+      color: var(--neutral-500);
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+  &.tokengovernanceanduseoffunds {
+    .details-card {
+      width: 100%;
+      @include media-breakpoint-up(sm) {
+        max-width: 25%;
+      }
+    }
+  }
+  &.communityandsocialchannels {
+    .details-card {
+      width: 50%;
+      @include media-breakpoint-up(sm) {
+        width: 33%;
+      }
+    }
+  }
+}
+
+.how-to-guide {
+  strong {
+    color: $body-color;
+  }
+  .section-table {
+    @extend .announcement-modal !optional;
+  }
+}
+
+.icon-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  &.small {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0;
+    svg {
+      width: 2rem !important;
+      height: auto;
+    }
+  }
+  &.half {
+    width: 3rem;
+    height: 3rem;
+  }
+  &.medium {
+    width: 4rem;
+    height: 4rem;
+    svg {
+      width: 2rem !important;
+      height: auto;
+    }
+  }
+}
+
+.lh-1-1 {
+  line-height: 110%;
+}
+
+.led {
+  width: 0.825em;
+  height: 0.825em;
+  min-width: 0.825em;
+  min-height: 0.825em;
+  border-radius: 100%;
+  background-color: var(--primary);
+}
+
+.predicted-day {
+  color: #515151;
+}
+.small-info-card {
+  font-family: $headings-font-family;
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 12px;
+  background-color: var(--neutral-800);
+}
+
+.flex-even {
+  flex: 1;
+}
+
+.not-found {
+  min-width: 35vw;
+}
+
+.opacity-30 {
+  --bg-opacity: 0.3;
+}
+
+.modal-backdrop {
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+}
+
+.tooltip-md {
+  .tooltip-inner {
+    text-align: left;
+    min-width: 15rem;
+  }
+}
+
+.trim-wrapper {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+}

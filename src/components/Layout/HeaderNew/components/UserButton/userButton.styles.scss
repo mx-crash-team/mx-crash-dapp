@@ -1,0 +1,60 @@
+.user-button {
+  margin: 0 1.25rem 0.75rem;
+
+  .btn {
+    --btn-padding-x: 0.75rem;
+  }
+  .user-button-trim {
+    --btn-color: var(--neutral-300);
+    padding-left: 2rem;
+    padding-right: 0.5rem;
+    cursor: text;
+    display: flex;
+    flex-direction: row;
+    font-weight: 400;
+    span {
+      height: 1.5rem;
+    }
+    &:before {
+      content: '';
+      top: 2px;
+      bottom: 0;
+      left: 1rem;
+      margin: auto;
+      position: absolute;
+      border-radius: 50%;
+      height: 0.5rem;
+      width: 0.5rem;
+      background-color: var(--primary);
+    }
+    &:after {
+      content: '';
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      position: absolute;
+      height: 1rem;
+      width: 1px;
+      background-color: var(--neutral-900);
+    }
+    &:hover,
+    &:active,
+    &:focus-visible {
+      --btn-hover-color: var(--neutral-300);
+      --btn-hover-bg: var(--neutral-800);
+      --btn-active-color: var(--neutral-300);
+      --btn-active-bg: var(--neutral-800);
+    }
+  }
+  .btn-account,
+  .user-button-logout {
+    --btn-color: var(--neutral-500);
+  }
+  .btn-account + .user-button-trim {
+    padding-left: 0.5rem;
+    &:before {
+      display: none;
+    }
+  }
+}

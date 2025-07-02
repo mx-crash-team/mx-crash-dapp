@@ -1,0 +1,5 @@
+.main-content {
+  > .page-state:not(.stepper-page-state) {
+    margin: $spacer-val auto !important;
+  }
+}

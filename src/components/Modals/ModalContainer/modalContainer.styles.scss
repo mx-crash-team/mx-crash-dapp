@@ -1,0 +1,36 @@
+.modal-dialog {
+  .modal-content {
+    .modal-header {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1rem 0 1rem;
+      border: 0;
+      font-size: $h4-font-size;
+      font-family: $headings-font-family;
+      .btn-close {
+        order: -1;
+      }
+      .i-icon,
+      .btn-close {
+        font-size: $font-size-base;
+      }
+      @include media-breakpoint-up(sm) {
+        padding: $spacer-val $spacer-val 0 $spacer-val;
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      min-height: 10rem;
+    }
+
+    .modal-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}

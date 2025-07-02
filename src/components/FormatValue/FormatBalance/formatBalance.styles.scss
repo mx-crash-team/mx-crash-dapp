@@ -1,0 +1,41 @@
+.format-balance {
+  font-family: var(--headings-font-family);
+  white-space: nowrap;
+
+  .dapp-core-component__formatAmountStyles__decimals {
+    opacity: 0.75;
+  }
+
+  &-approximation {
+    opacity: 0.75;
+  }
+
+  &-symbol {
+    width: auto;
+    height: 0.5em;
+    position: relative;
+    top: 0.05em;
+
+    path {
+      fill: currentColor;
+    }
+  }
+  &-token-symbol {
+    width: 1.125em;
+    height: 1.125em;
+    margin-top: -0.188em;
+    margin-right: 0.25em;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  &-suffix {
+    margin-left: 0.375rem;
+    opacity: 0.75;
+  }
+  sup {
+    margin-left: 0.125rem;
+    top: -0.35em;
+    font-size: 0.688em;
+    line-height: 1;
+  }
+}
