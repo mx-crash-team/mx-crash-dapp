@@ -15,7 +15,7 @@ export const WalletOverview = () => {
       <h5 className='text-underline mt-spacer mb-0'>Wallet</h5>
       <h1 className='my-3'>{usdAccountValue}</h1>
 
-      <div className='d-flex flex-column gap-2'>
+      <div className='d-flex flex-column gap-2 wallet-overview-token-list'>
         {accountTokens.map((token, index) => (
           <TokenRow token={token} key={`${token?.identifier}-${index}`} />
         ))}

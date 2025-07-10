@@ -20,7 +20,7 @@ export const Chat = () => {
   useRegisterWebsocketChatListener(onMessage);
 
   return (
-    <div className='chat card flex-grow-1 h-100'>
+    <div className='chat card flex-grow-1 h-100 rounded'>
       <div className='card-body'>
         {text && (
           <ul>
