@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { websocketHistorySelector, websocketNewBetsSelector } from 'redux/selectors';
+import { websocketHistorySelector } from 'redux/selectors';
 import { useInitializeWebsocketConnection } from './useInitializeWebsocketConnection';
 
 export function userRegisterWebsocketHistoryListener (

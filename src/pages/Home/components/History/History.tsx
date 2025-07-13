@@ -15,7 +15,7 @@ export const History = () => {
   const [history, setHistory] = useState<WSBidType[]>([]);
 
   const onMessage = async (message: any) => {
-    const address = message?.data[0].address;
+    const address = message?.data[0]?.winner?.bech32;
 
     if (address && history.length > 0) {
       const eventExists = history.some(
