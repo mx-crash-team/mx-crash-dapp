@@ -1,36 +1,83 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useRegisterWebsocketChatListener } from 'hooks/websocketListener';
-import { setWebsocketChat } from 'redux/slices';
+import { useRegisterWebsocketChatListener, useRegisterWebsocketStatusListener } from 'hooks/websocketListener';
+import { setWebsocketChat, setWebsocketHistory } from 'redux/slices';
+import { WSBidType } from 'types';
+import { userRegisterWebsocketHistoryListener } from 'hooks/websocketListener/useRegisterWebsocketHistoryListener';
+import { FormatAmount } from 'components';
+import { Trim } from '@multiversx/sdk-dapp/UI';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
+import { formatBigNumber } from 'helpers';
 
-export const Chat = () => {
+export const History = () => {
   const dispatch = useDispatch();
-  const [text, setText] = useState('');
-  const onMessage = async (message: any) => {
-    const displayText = message?.data?.content;
+  const [history, setHistory] = useState<WSBidType[]>([]);
 
-    if (displayText && displayText !== text) {
-      setText(displayText);
-      dispatch(setWebsocketChat(null));
+  const onMessage = async (message: any) => {
+    const address = message?.data[0].address;
+
+    if (address && history.length > 0) {
+      const eventExists = history.some(
+        ({ address }) => address === address
+      );
+      if (eventExists) {
+        return;
+      }
+    }
+      const updateHistory = [...message.data, ...history];
+      setHistory(updateHistory);
+    }
+
+  const onStatusMessage = (message: any) => {
+    if (
+      history.length > 0 &&
+      (message?.data?.status === 'Awarding' ||
+        message?.data?.status === 'Ended')
+    ) {
+      dispatch(setWebsocketHistory(null));
+      setHistory([]);
       return;
     }
   };
 
-  useRegisterWebsocketChatListener(onMessage);
+    userRegisterWebsocketHistoryListener(onMessage);
+    useRegisterWebsocketStatusListener(onStatusMessage);
 
   return (
-    <div className='chat card flex-grow-1 h-100 rounded'>
-      <div className='card-body'>
-        {text && (
-          <ul>
-            <li className='d-flex flex-column gap-2'>
-              <div className='user'>Nicu Sordan</div>
-              <div className='message'>{text}</div>
-            </li>
-          </ul>
-        )}
+    <section className='border shadow-sm rounded'>
+      <div className='table-responsive'>
+        <table className='table table-striped table-component'>
+          <thead className='thead-light'>
+            <tr>
+              <th>Player</th>
+              <th>Amount</th>
+              <th>Crash Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            {history.map(({ address, bet, cash_out }, index) => {
+              return (
+                <tr key={`${address}-${index}`}>
+                  <td>
+                    <Trim text={address} className='header-user-address-trim' />
+                  </td>
+                  <td>
+                    <FormatAmount
+                      value={bet}
+                      decimals={DECIMALS}
+                      digits={2}
+                      showSymbol={false}
+                    />
+                  </td>
+                  <td>{formatBigNumber({ value: cash_out / 100 })}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-    </div>
+    </section>
   );
-};
+
+  };

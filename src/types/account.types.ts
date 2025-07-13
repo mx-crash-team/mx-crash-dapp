@@ -19,6 +19,10 @@ export interface AccountStateType {
     timestamp: number;
     data: any;
   } | null;
+  websocketHistory: {
+    timestamp: number;
+    data: any;
+  } | null;
 }
 
 export interface SetAccountIdentityType {
