@@ -10,7 +10,7 @@ import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
 import { useRegisterWebsocketStatusListener } from 'hooks/websocketListener';
 import { Claim } from './Claim';
-import { History } from '../Chat';
+import { History } from '../History';
 
 export const Interface = () => {
   const ref = React.useRef(null);
