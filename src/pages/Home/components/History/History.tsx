@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { useRegisterWebsocketStatusListener, useRegisterWebsocketHistoryListener } from 'hooks/websocketListener';
 import { setWebsocketHistory } from 'redux/slices';
@@ -12,6 +13,30 @@ import { formatBigNumber } from 'helpers';
 export const History = () => {
   const dispatch = useDispatch();
   const [history, setHistory] = useState<WSBidType[]>([]);
+
+  // load initial history on mount
+  useEffect(() => {
+    let mounted = true;
+    const loadHistory = async () => {
+      try {
+        const resp = await axios.get('http://localhost:3000/winners/history');
+        const data = resp.data as any[];
+        // normalize server response to WSBidType
+        const initial: WSBidType[] = data.map(evt => ({
+          address: evt.winner?.bech32 ?? evt.address,
+          bet: evt.prize ?? evt.bet,
+          cash_out: evt.cash_out
+        }));
+        if (mounted) {
+          setHistory(initial);
+        }
+      } catch (err) {
+        console.error('Failed to fetch history:', err);
+      }
+    };
+    loadHistory();
+    return () => { mounted = false; };
+  }, []);
 
   const onMessage = useCallback((message: { data: any[] }) => {
     setHistory(prevHistory => {
@@ -47,7 +72,7 @@ useRegisterWebsocketStatusListener(onStatusMessage);
           <thead className='thead-light'>
             <tr>
               <th>Player</th>
-              <th>Amount</th>
+              <th>Prize</th>
               <th>Crash Point</th>
             </tr>
           </thead>
