@@ -8,7 +8,8 @@ import { websocketUrl } from 'config';
 import {
   setWebsocketEvent,
   setWebsocketStatus,
-  setWebsocketNewBets
+  setWebsocketNewBets,
+  setWebsocketHistory
 } from 'redux/slices';
 
 import {
@@ -44,6 +45,11 @@ export function useInitializeWebsocketConnection() {
           return;
         case 'onNewBets':
           dispatch(setWebsocketNewBets({ message, data }));
+          return;
+        case 'onHistory':
+        case 'onComputePrizes':
+          // full history update or compute prizes – reload history entries
+          dispatch(setWebsocketHistory({ message, data }));
           return;
         default:
           dispatch(setWebsocketEvent({ message, data }));

@@ -1,4 +1,4 @@
-import { Chart, Interface, Table } from './components';
+import { Chart, History, Interface, Table } from './components';
 
 export const Home = () => {
   return (
@@ -11,6 +11,7 @@ export const Home = () => {
           <div className='col-12 col-lg-8 d-flex flex-column gap-4 mt-3 mt-lg-0'>
             <Chart />
             <Table />
+            <History />
           </div>
         </div>
       </div>

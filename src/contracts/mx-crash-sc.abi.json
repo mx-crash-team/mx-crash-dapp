@@ -1,11 +1,11 @@
 {
     "buildInfo": {
         "rustc": {
-            "version": "1.79.0",
-            "commitHash": "129f3b9964af4d4a709d1383930ade12dfe7c081",
-            "commitDate": "2024-06-10",
+            "version": "1.86.0",
+            "commitHash": "05f9846f893b09a1be1fc8560e33fc3c815cfecb",
+            "commitDate": "2025-03-31",
             "channel": "Stable",
-            "short": "rustc 1.79.0 (129f3b996 2024-06-10)"
+            "short": "rustc 1.86.0 (05f9846f8 2025-03-31)"
         },
         "contractCrate": {
             "name": "mx-crash-sc",
@@ -13,7 +13,7 @@
         },
         "framework": {
             "name": "multiversx-sc",
-            "version": "0.54.6"
+            "version": "0.59.0"
         }
     },
     "name": "MxCrashSc",
@@ -28,7 +28,7 @@
     "endpoints": [
         {
             "name": "deposit",
-            "onlyOwner": true,
+            "onlyAdmin": true,
             "mutability": "mutable",
             "payableInTokens": [
                 "EGLD"
@@ -38,7 +38,7 @@
         },
         {
             "name": "withdraw",
-            "onlyOwner": true,
+            "onlyAdmin": true,
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
@@ -61,7 +61,7 @@
             "outputs": []
         },
         {
-            "name": "newGame",
+            "name": "setDuration",
             "onlyOwner": true,
             "mutability": "mutable",
             "inputs": [
@@ -73,12 +73,40 @@
             "outputs": []
         },
         {
+            "name": "setInstantCrashChance",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "chance",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "newGame",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
             "name": "status",
             "mutability": "readonly",
             "inputs": [],
             "outputs": [
                 {
                     "type": "Status"
+                }
+            ]
+        },
+        {
+            "name": "game_duration",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
                 }
             ]
         },
@@ -149,6 +177,7 @@
         },
         {
             "name": "endGame",
+            "onlyAdmin": true,
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
@@ -172,6 +201,66 @@
             "outputs": [
                 {
                     "type": "GameDetails"
+                }
+            ]
+        },
+        {
+            "name": "getContestantDetails",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<ContestantDetails>"
+                }
+            ]
+        },
+        {
+            "name": "isAdmin",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "addAdmin",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "removeAdmin",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getAdmins",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
                 }
             ]
         }
@@ -256,6 +345,23 @@
     "esdtAttributes": [],
     "hasCallback": false,
     "types": {
+        "ContestantDetails": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                },
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "cash_out",
+                    "type": "u32"
+                }
+            ]
+        },
         "GameDetails": {
             "type": "struct",
             "fields": [
