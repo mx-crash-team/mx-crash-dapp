@@ -48,6 +48,7 @@ export function useInitializeWebsocketConnection() {
           return;
         case 'onHistory':
         case 'onComputePrizes':
+          // full history update or compute prizes – reload history entries
           dispatch(setWebsocketHistory({ message, data }));
           return;
         default:

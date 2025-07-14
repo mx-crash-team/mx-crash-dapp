@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { useRegisterWebsocketStatusListener, useRegisterWebsocketHistoryListener } from 'hooks/websocketListener';
 import { setWebsocketHistory } from 'redux/slices';
 import { WSBidType } from 'types';
+import { websocketStatusSelector } from 'redux/selectors';
 import { FormatAmount } from 'components';
 import { Trim } from '@multiversx/sdk-dapp/UI';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
@@ -13,6 +14,7 @@ import { formatBigNumber } from 'helpers';
 export const History = () => {
   const dispatch = useDispatch();
   const [history, setHistory] = useState<WSBidType[]>([]);
+  const wsStatus = useSelector(websocketStatusSelector);
 
   // reusable history loader
   const isMounted = useRef(true);
@@ -65,12 +67,20 @@ export const History = () => {
   }, []);
 
   const onStatusMessage = useCallback((message: any) => {
-    const status = message?.data?.status;
+    // message is the data payload from server; may be array or object
+    let payload = message;
+    if (Array.isArray(payload)) {
+      payload = payload[0];
+    }
+    const status = payload?.status;
+    if (!status) {
+      return;
+    }
+    // clear redux history on awarding or end of round
     if (status === 'Awarding' || status === 'Ended') {
-      // clear global redux history but retain the displayed history table
       dispatch(setWebsocketHistory(null));
     }
-    // on new round start, reload history
+    // on new round start, clear and reload history
     if (status === 'Starting' || status === 'Started') {
       setHistory([]);
       loadHistory();
@@ -79,6 +89,23 @@ export const History = () => {
 
 useRegisterWebsocketHistoryListener(onMessage);
 useRegisterWebsocketStatusListener(onStatusMessage);
+
+  // reload history when a new round starts (via websocket status)
+  useEffect(() => {
+    if (!wsStatus?.data) {
+      return;
+    }
+    // unwrap status payload
+    let payload = wsStatus.data.data;
+    if (Array.isArray(payload)) {
+      payload = payload[0];
+    }
+    const status = payload?.status;
+    if (status === 'Ended') {
+      setHistory([]);
+      loadHistory();
+    }
+  }, [wsStatus, loadHistory]);
 
   return (
     <section className='history border shadow-sm rounded'>
@@ -92,12 +119,17 @@ useRegisterWebsocketStatusListener(onStatusMessage);
             </tr>
           </thead>
           <tbody>
-            {history.map(({ address, cash_out, bet }, index) => {
+            {history
+              .filter(entry => entry.address && entry.bet != null && entry.cash_out != null)
+              .map(({ address, cash_out, bet }, index) => {
               return (
                 <tr key={`${address}-${index}`}>
-                  <td>
-                    <Trim text={address} className='header-user-address-trim' />
-                  </td>
+                <td className='header-user-address-trim'>
+                  {/* show first 6 and last 3 chars of address */}
+                  {address.length > 9
+                    ? `${address.slice(0, 6)}...${address.slice(-3)}`
+                    : address}
+                </td>
                   <td>{formatBigNumber({ value: cash_out / 100 })}</td>
                   <td>
                     <FormatAmount
