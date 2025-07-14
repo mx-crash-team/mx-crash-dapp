@@ -1,4 +1,13 @@
 .history {
+  // reduce row height for history table
+  .table-component {
+    th,
+    td {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+  }
 
   ul {
     padding: 0;
