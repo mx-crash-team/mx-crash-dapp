@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useRegisterWebsocketChatListener, useRegisterWebsocketStatusListener } from 'hooks/websocketListener';
-import { setWebsocketChat, setWebsocketHistory } from 'redux/slices';
+import { useRegisterWebsocketStatusListener, useRegisterWebsocketHistoryListener } from 'hooks/websocketListener';
+import { setWebsocketHistory } from 'redux/slices';
 import { WSBidType } from 'types';
-import { userRegisterWebsocketHistoryListener } from 'hooks/websocketListener/useRegisterWebsocketHistoryListener';
 import { FormatAmount } from 'components';
 import { Trim } from '@multiversx/sdk-dapp/UI';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
@@ -14,38 +13,35 @@ export const History = () => {
   const dispatch = useDispatch();
   const [history, setHistory] = useState<WSBidType[]>([]);
 
-  const onMessage = async (message: any) => {
-    const address = message?.data[0]?.winner?.bech32;
+  const onMessage = useCallback((message: any) => {
+    setHistory(prevHistory => {
+      const winnerAddress = message?.data?.[0]?.winner?.bech32;
 
-    if (address && history.length > 0) {
-      const eventExists = history.some(
-        ({ address }) => address === address
-      );
-      if (eventExists) {
-        return;
+      if (winnerAddress && prevHistory.length > 0) {
+        const eventExists = prevHistory.some(
+          ({ address }) => address === winnerAddress
+        );
+        if (eventExists) {
+          return prevHistory;
+        }
       }
-    }
-      const updateHistory = [...message.data, ...history];
-      setHistory(updateHistory);
-    }
+      return [...message.data, ...prevHistory];
+    });
+  }, []);
 
-  const onStatusMessage = (message: any) => {
-    if (
-      history.length > 0 &&
-      (message?.data?.status === 'Awarding' ||
-        message?.data?.status === 'Ended')
-    ) {
+  const onStatusMessage = useCallback((message: any) => {
+    const status = message?.data?.status;
+    if (status === 'Awarding' || status === 'Ended') {
+      // clear global redux history but retain the displayed history table
       dispatch(setWebsocketHistory(null));
-      setHistory([]);
-      return;
     }
-  };
+  }, [dispatch]);
 
-    userRegisterWebsocketHistoryListener(onMessage);
-    useRegisterWebsocketStatusListener(onStatusMessage);
+useRegisterWebsocketHistoryListener(onMessage);
+useRegisterWebsocketStatusListener(onStatusMessage);
 
   return (
-    <section className='border shadow-sm rounded'>
+    <section className='history border shadow-sm rounded'>
       <div className='table-responsive'>
         <table className='table table-striped table-component'>
           <thead className='thead-light'>

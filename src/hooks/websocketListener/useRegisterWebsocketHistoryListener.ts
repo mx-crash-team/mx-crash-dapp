@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { websocketHistorySelector } from 'redux/selectors';
 import { useInitializeWebsocketConnection } from './useInitializeWebsocketConnection';
 
-export function userRegisterWebsocketHistoryListener (
+export function useRegisterWebsocketHistoryListener(
   onMessage: (message: any) => void
 ) {
   useInitializeWebsocketConnection();
