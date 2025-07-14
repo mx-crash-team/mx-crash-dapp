@@ -16,7 +16,6 @@ export const History = () => {
   const [history, setHistory] = useState<WSBidType[]>([]);
   const wsStatus = useSelector(websocketStatusSelector);
 
-  // reusable history loader
   const isMounted = useRef(true);
   const loadHistory = useCallback(async () => {
     try {
@@ -38,7 +37,6 @@ export const History = () => {
       console.error('Failed to fetch history:', err);
     }
   }, []);
-  // load initial history on mount
   useEffect(() => {
     loadHistory();
     return () => {
@@ -48,26 +46,21 @@ export const History = () => {
 
   const onMessage = useCallback((message: { data: any[] }) => {
     setHistory(prevHistory => {
-      // normalize incoming winner events to match WSBidType shape
-      // normalize and include timestamp
       const newEntries: WSBidType[] = message.data.map((evt: any): WSBidType => ({
         address: evt.winner.bech32,
         bet: evt.prize,
         cash_out: evt.cash_out,
         timestamp: evt.timestamp
       }));
-      // filter out duplicates by address
       const filtered = newEntries.filter(
         (entry: WSBidType) => !prevHistory.some((prev: WSBidType) => prev.address === entry.address)
       );
-      // merge and sort by timestamp desc
       return [...filtered, ...prevHistory]
         .sort((a, b) => b.timestamp - a.timestamp);
     });
   }, []);
 
   const onStatusMessage = useCallback((message: any) => {
-    // message is the data payload from server; may be array or object
     let payload = message;
     if (Array.isArray(payload)) {
       payload = payload[0];
@@ -76,11 +69,9 @@ export const History = () => {
     if (!status) {
       return;
     }
-    // clear redux history on awarding or end of round
     if (status === 'Awarding' || status === 'Ended') {
       dispatch(setWebsocketHistory(null));
     }
-    // on new round start, clear and reload history
     if (status === 'Starting' || status === 'Started') {
       setHistory([]);
       loadHistory();
@@ -90,7 +81,6 @@ export const History = () => {
 useRegisterWebsocketHistoryListener(onMessage);
 useRegisterWebsocketStatusListener(onStatusMessage);
 
-  // reload history when a new round starts (via websocket status)
   useEffect(() => {
     if (!wsStatus?.data) {
       return;
@@ -125,7 +115,6 @@ useRegisterWebsocketStatusListener(onStatusMessage);
               return (
                 <tr key={`${address}-${index}`}>
                 <td className='header-user-address-trim'>
-                  {/* show first 6 and last 3 chars of address */}
                   {address.length > 9
                     ? `${address.slice(0, 6)}...${address.slice(-3)}`
                     : address}

@@ -48,7 +48,6 @@ export function useInitializeWebsocketConnection() {
           return;
         case 'onHistory':
         case 'onComputePrizes':
-          // full history update or compute prizes – reload history entries
           dispatch(setWebsocketHistory({ message, data }));
           return;
         default:
@@ -74,8 +73,6 @@ export function useInitializeWebsocketConnection() {
           return;
         }
 
-        // If there are many components that use this hook, the initialize method is triggered many times.
-        // To avoid multiple connections to the same endpoint, we have to guard the initialization before the logic started
         websocketConnection.status = WebsocketConnectionStatusEnum.PENDING;
 
         if (websocketUrl == null) {
@@ -103,12 +100,10 @@ export function useInitializeWebsocketConnection() {
 
         websocketConnection.current.on(DISCONNECT, () => {
           if (address) {
-            // Make sure we are still logged in before retrying to connect to the websocket
             console.warn('Websocket disconnected. Trying to reconnect..!');
 
             setTimeout(() => {
               if (address) {
-                // Make sure we are still logged in when the timeout is finished
                 console.log('Websocket reconnecting..!');
                 websocketConnection.current?.connect();
               }
@@ -136,7 +131,6 @@ export function useInitializeWebsocketConnection() {
     }
 
     if (!address) {
-      // Close the websocket connection when we are not logged in
       unsubscribeWS();
     }
   }, [address, initializeWebsocketConnection]);

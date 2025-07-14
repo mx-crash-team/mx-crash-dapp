@@ -1,6 +1,8 @@
 .history {
   // reduce row height for history table
   .table-component {
+    // override default min-width to fit mobile
+    min-width: auto;
     th,
     td {
       padding-top: 0.5rem;
@@ -26,4 +28,18 @@
       }
     }
   }
-}
+  }
+  // responsiveness tweaks
+  @media (max-width: 576px) {
+    .table-responsive {
+      overflow-x: auto;
+    }
+    .table-component {
+      min-width: auto !important;
+      th,
+      td {
+        padding: 0.25rem !important;
+        font-size: 0.75rem !important;
+      }
+    }
+  }
