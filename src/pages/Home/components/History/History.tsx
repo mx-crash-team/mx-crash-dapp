@@ -13,19 +13,19 @@ export const History = () => {
   const dispatch = useDispatch();
   const [history, setHistory] = useState<WSBidType[]>([]);
 
-  const onMessage = useCallback((message: any) => {
+  const onMessage = useCallback((message: { data: any[] }) => {
     setHistory(prevHistory => {
-      const winnerAddress = message?.data?.[0]?.winner?.bech32;
-
-      if (winnerAddress && prevHistory.length > 0) {
-        const eventExists = prevHistory.some(
-          ({ address }) => address === winnerAddress
-        );
-        if (eventExists) {
-          return prevHistory;
-        }
-      }
-      return [...message.data, ...prevHistory];
+      // normalize incoming winner events to match WSBidType shape
+      const newEntries: WSBidType[] = message.data.map((evt: any): WSBidType => ({
+        address: evt.winner.bech32,
+        bet: evt.prize,
+        cash_out: evt.cash_out
+      }));
+      // filter out duplicates by address
+      const filtered = newEntries.filter(
+        (entry: WSBidType) => !prevHistory.some((prev: WSBidType) => prev.address === entry.address)
+      );
+      return [...filtered, ...prevHistory];
     });
   }, []);
 
