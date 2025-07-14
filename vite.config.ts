@@ -43,6 +43,15 @@ export default defineConfig({
       usePolling: false,
       useFsEvents: false
     }
+    ,
+    // proxy API calls to backend on port 3000 in development
+    proxy: {
+      '/winners': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
   },
   preview: {
     port: 3001,
