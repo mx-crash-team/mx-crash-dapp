@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { Trim } from '@multiversx/sdk-dapp/UI';
 import { useDispatch } from 'react-redux';
@@ -10,11 +10,26 @@ import {
   useRegisterWebsocketStatusListener
 } from 'hooks/websocketListener';
 import { setWebsocketNewBets } from 'redux/slices';
+import axios from 'axios';
 import { WSBidType } from 'types';
 
 export const Table = () => {
   const dispatch = useDispatch();
   const [bids, setBids] = useState<WSBidType[]>([]);
+
+  // Load initial list of current bets from the server
+  useEffect(() => {
+    const loadCurrentBets = async () => {
+      try {
+        const resp = await axios.get<WSBidType[]>('/bets/current');
+        setBids(resp.data);
+      } catch (err) {
+        console.error('Failed to fetch current bets:', err);
+      }
+    };
+
+    loadCurrentBets();
+  }, []);
 
   const onMessage = (message: any) => {
     const currentAddress = message?.data?.[0]?.address;
