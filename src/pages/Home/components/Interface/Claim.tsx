@@ -25,16 +25,19 @@ export const Claim = () => {
     await sendClaimTransactionFromAbi({});
   };
 
-  if (claimableAmount !== '0') {
-    return (
-      <>
-        <Confetti />
-        <button type='button' className='btn btn-dark' onClick={onSubmit}>
-          Claim
-        </button>
-      </>
-    );
-  }
-
-  return null;
+  // Always show the Claim button; enable only when there's a non-zero amount
+  return (
+    <>
+      {/* show confetti when claimable */}
+      {claimableAmount !== '0' && <Confetti />}
+      <button
+        type='button'
+        className='btn btn-dark'
+        onClick={onSubmit}
+        disabled={claimableAmount === '0'}
+      >
+        Claim
+      </button>
+    </>
+  );
 };
