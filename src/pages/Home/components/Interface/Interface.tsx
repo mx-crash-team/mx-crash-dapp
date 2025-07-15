@@ -109,14 +109,13 @@ export const Interface = () => {
           <Countdown utcDate={deadline} />
         </div>
       )}
-      <div className='row g-3'>
-        <div className='col-6'>
+      <div className='d-flex gap-2'>
+        <div className='w-50'>
           <div className='form-group'>
             <input
               type='tel'
               className='form-control'
               id='amount'
-              aria-describedby='amountHelp'
               placeholder='Bet Amount'
               defaultValue={amount}
               onChange={handleChange}
@@ -124,13 +123,12 @@ export const Interface = () => {
             />
           </div>
         </div>
-        <div className='col-6'>
+        <div className='w-50'>
           <div className='form-group'>
             <input
               type='tel'
               className='form-control'
               id='cash_out'
-              aria-describedby='cash_outHelp'
               placeholder='Auto Cashout'
               defaultValue={cash_out}
               onChange={handleChange}
@@ -150,10 +148,14 @@ export const Interface = () => {
         </div>
       )}
       <div className='d-flex gap-2'>
-        <Claim className='flex-fill' />
-        <button type='submit' className='btn btn-primary flex-fill' disabled={!candBet}>
-          Bet
-        </button>
+        <div className='w-50'>
+          <Claim className='w-100' />
+        </div>
+        <div className='w-50'>
+          <button type='submit' className='btn btn-primary w-100' disabled={!candBet}>
+            Bet
+          </button>
+        </div>
       </div>
     </form>
   );
