@@ -3,8 +3,8 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
 import { BigNumber } from 'bignumber.js';
 import { useFormik } from 'formik';
-import moment from 'moment';
 import { object, string } from 'yup';
+import moment from 'moment';
 
 import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
@@ -104,6 +104,11 @@ export const Interface = () => {
       ref={ref}
       className='d-flex flex-column text-start gap-3 h-100'
     >
+      {deadline && (
+        <div className='text-center mb-2'>
+          <Countdown utcDate={deadline} />
+        </div>
+      )}
       <div className='form-group'>
         <label htmlFor='amount'>Bet Amount</label>
         <input
@@ -154,7 +159,6 @@ export const Interface = () => {
         Bet
       </button>
       <Claim />
-      {deadline && <Countdown utcDate={deadline} />}
     </form>
   );
 };
