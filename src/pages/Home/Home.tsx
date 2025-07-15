@@ -10,8 +10,14 @@ export const Home = () => {
           </div>
           <div className='col-12 col-lg-8 d-flex flex-column gap-4 mt-3 mt-lg-0'>
             <Chart />
-            <Table />
-            <History />
+            <div className='row g-3'>
+              <div className='col-6'>
+                <Table />
+              </div>
+              <div className='col-6'>
+                <History />
+              </div>
+            </div>
           </div>
         </div>
       </div>
