@@ -155,10 +155,12 @@ export const Interface = () => {
           {touched.cash_out && errors.cash_out}
         </div>
       )}
-      <button type='submit' className='btn btn-primary' disabled={!candBet}>
-        Bet
-      </button>
-      <Claim />
+      <div className='d-flex gap-2'>
+        <Claim className='flex-fill' />
+        <button type='submit' className='btn btn-primary flex-fill' disabled={!candBet}>
+          Bet
+        </button>
+      </div>
     </form>
   );
 };
