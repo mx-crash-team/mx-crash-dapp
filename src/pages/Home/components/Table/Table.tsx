@@ -77,7 +77,9 @@ export const Table = () => {
               return (
                 <tr key={`${address}-${index}`}>
                   <td>
-                    <Trim text={address} className='header-user-address-trim' />
+                  {address.length > 9
+                    ? `${address.slice(0, 6)}...${address.slice(-3)}`
+                    : address}
                   </td>
                   <td>
                     <FormatAmount
