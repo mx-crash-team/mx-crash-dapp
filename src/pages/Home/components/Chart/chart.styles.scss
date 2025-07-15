@@ -33,6 +33,10 @@
     justify-content: center;
     overflow: hidden;
     h2 {
+      position: relative;
+      z-index: 1;
+      /* move status text upward */
+      transform: translateY(-20px);
       display: flex;
       align-items: center;
       font-weight: 800;
