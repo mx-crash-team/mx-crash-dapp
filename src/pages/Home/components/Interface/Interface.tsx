@@ -109,49 +109,55 @@ export const Interface = () => {
           <Countdown utcDate={deadline} />
         </div>
       )}
-      <div className='form-group'>
-        <label htmlFor='amount'>Bet Amount</label>
-        <input
-          type='tel'
-          className='form-control'
-          id='amount'
-          aria-describedby='amountHelp'
-          placeholder='Bet Amount'
-          defaultValue={amount}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        <span id='amountHelp' className=' d-flex align-items-center gap-2'>
-          Available Balance{' '}
-          <FormatAmount
-            value={account?.balance ?? '0'}
-            decimals={DECIMALS}
-            digits={2}
-            showSymbol={false}
-            className='fw-bold'
-          />
-        </span>
-      </div>
-      <div className='form-group'>
-        <label htmlFor='cash_out'>Auto Cashout</label>
-        <input
-          type='tel'
-          className='form-control'
-          id='cash_out'
-          aria-describedby='cash_outHelp'
-          placeholder='Auto Cashout'
-          defaultValue={cash_out}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+      <div className='row g-3'>
+        <div className='col-6'>
+          <div className='form-group'>
+            <label htmlFor='amount'>Bet Amount</label>
+            <input
+              type='tel'
+              className='form-control'
+              id='amount'
+              aria-describedby='amountHelp'
+              placeholder='Bet Amount'
+              defaultValue={amount}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <span id='amountHelp' className='d-flex align-items-center gap-2'>
+              Available Balance{' '}
+              <FormatAmount
+                value={account?.balance ?? '0'}
+                decimals={DECIMALS}
+                digits={2}
+                showSymbol={false}
+                className='fw-bold'
+              />
+            </span>
+          </div>
+        </div>
+        <div className='col-6'>
+          <div className='form-group'>
+            <label htmlFor='cash_out'>Auto Cashout</label>
+            <input
+              type='tel'
+              className='form-control'
+              id='cash_out'
+              aria-describedby='cash_outHelp'
+              placeholder='Auto Cashout'
+              defaultValue={cash_out}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+        </div>
       </div>
       {'amount' in errors && touched.amount && errors.amount && (
-        <div className='text-danger small mt-1 ' data-testid='invalidAmount'>
+        <div className='text-danger small mt-1' data-testid='invalidAmount'>
           {touched.amount && errors.amount}
         </div>
       )}
       {'cash_out' in errors && touched.cash_out && errors.cash_out && (
-        <div className='text-danger small mt-1 ' data-testid='invalidCashOut'>
+        <div className='text-danger small mt-1' data-testid='invalidCashOut'>
           {touched.cash_out && errors.cash_out}
         </div>
       )}
