@@ -65,6 +65,19 @@ export const Table = () => {
 
   return (
     <section className='border shadow-sm rounded'>
+      <div className='p-3'>
+        <h3
+          className='m-0 fs-5'
+          style={{
+            backgroundImage: 'linear-gradient(135deg, #ffffff 0%, #da4453 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent'
+          }}
+        >
+          Current Bets
+        </h3>
+      </div>
       <div className='table-responsive'>
         <table className='table table-striped table-component'>
           <thead className='thead-light'>
