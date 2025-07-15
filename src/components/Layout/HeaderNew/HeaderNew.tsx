@@ -4,7 +4,9 @@ import { Navbar } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as Logo } from 'assets/images/logo-color.svg';
-import { UnlockBtn } from 'components';
+import { UnlockBtn, FormatAmount } from 'components';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { useLogout, useIsAuthenticated } from 'hooks';
 import { routeNames } from 'routes';
 
@@ -14,6 +16,7 @@ export const HeaderNew = () => {
   const location = useLocation();
   const logout = useLogout({ shouldAttemptReLogin: false });
   const isAuthenticated = useIsAuthenticated();
+  const { account } = useGetAccountInfo();
 
   const [show, setShow] = useState(false);
 
@@ -45,10 +48,20 @@ export const HeaderNew = () => {
               </Navbar>
             </div>
             <div className='header-end'>
-              <div
-                className='btn btn-unstyled header-navigation-trigger d-md-none'
-                onClick={handleShow}
-              >
+              <div className='d-flex align-items-center'>
+                {isAuthenticated && (
+                  <div className='text-white me-3'>
+                    <FormatAmount
+                      value={account?.balance ?? '0'}
+                      decimals={DECIMALS}
+                      digits={2}
+                    />
+                  </div>
+                )}
+                <div
+                  className='btn btn-unstyled header-navigation-trigger d-md-none'
+                  onClick={handleShow}
+                >
                 <div
                   className={classNames('header-navigation-bars', {
                     active: show
@@ -60,6 +73,7 @@ export const HeaderNew = () => {
                       key={`bar-${index}`}
                     />
                   ))}
+                </div>
                 </div>
               </div>
               <div className='d-none d-md-inline-block'>

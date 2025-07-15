@@ -112,7 +112,6 @@ export const Interface = () => {
       <div className='row g-3'>
         <div className='col-6'>
           <div className='form-group'>
-            <label htmlFor='amount'>Bet Amount</label>
             <input
               type='tel'
               className='form-control'
@@ -123,21 +122,10 @@ export const Interface = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <span id='amountHelp' className='d-flex align-items-center gap-2'>
-              Available Balance{' '}
-              <FormatAmount
-                value={account?.balance ?? '0'}
-                decimals={DECIMALS}
-                digits={2}
-                showSymbol={false}
-                className='fw-bold'
-              />
-            </span>
           </div>
         </div>
         <div className='col-6'>
           <div className='form-group'>
-            <label htmlFor='cash_out'>Auto Cashout</label>
             <input
               type='tel'
               className='form-control'
