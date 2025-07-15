@@ -108,7 +108,7 @@ useRegisterWebsocketStatusListener(onStatusMessage);
               <th>Prize</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='text-center'>
             {history
               .filter(entry => entry.address && entry.bet != null && entry.cash_out != null)
               .map(({ address, cash_out, bet }, index) => {

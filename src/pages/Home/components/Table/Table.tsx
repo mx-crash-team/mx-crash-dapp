@@ -21,8 +21,10 @@ export const Table = () => {
   useEffect(() => {
     const loadCurrentBets = async () => {
       try {
-        const resp = await axios.get<WSBidType[]>('/bets/current');
-        setBids(resp.data);
+        const resp = await axios.get<WSBidType | WSBidType[]>('/bets/current');
+        const fetched = resp.data;
+        const initial = Array.isArray(fetched) ? fetched : [fetched];
+        setBids(initial.filter(b => b && b.address));
       } catch (err) {
         console.error('Failed to fetch current bets:', err);
       }
@@ -72,12 +74,14 @@ export const Table = () => {
               <th>Crash Point</th>
             </tr>
           </thead>
-          <tbody>
-            {bids.map(({ address, bet, cash_out }, index) => {
+          <tbody className='text-center'>
+            {bids
+              .filter(entry => entry.address && entry.bet != null && entry.cash_out != null)
+              .map(({ address, cash_out, bet }, index) => {
               return (
                 <tr key={`${address}-${index}`}>
                   <td>
-                  {address.length > 9
+                  {address?.length > 9
                     ? `${address.slice(0, 6)}...${address.slice(-3)}`
                     : address}
                   </td>
