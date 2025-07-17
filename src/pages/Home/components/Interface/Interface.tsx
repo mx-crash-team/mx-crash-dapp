@@ -3,8 +3,8 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
 import { BigNumber } from 'bignumber.js';
 import { useFormik } from 'formik';
-import { object, string } from 'yup';
 import moment from 'moment';
+import { object, string } from 'yup';
 
 import { Countdown, FormatAmount } from 'components';
 import { useSendBetTransaction } from 'hooks/useSendBetTransaction';
@@ -152,7 +152,11 @@ export const Interface = () => {
           <Claim className='w-100' />
         </div>
         <div className='w-50'>
-          <button type='submit' className='btn btn-primary w-100' disabled={!candBet}>
+          <button
+            type='submit'
+            className='btn btn-primary w-100'
+            disabled={!candBet}
+          >
             Bet
           </button>
         </div>
