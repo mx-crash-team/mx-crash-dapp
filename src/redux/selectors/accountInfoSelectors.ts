@@ -34,3 +34,8 @@ export const websocketChatSelector = createDeepEqualSelector(
   accountInfoSelector,
   (state) => state.websocketChat
 );
+
+export const websocketHistorySelector = createDeepEqualSelector(
+  accountInfoSelector,
+  (state) => state.websocketHistory
+);

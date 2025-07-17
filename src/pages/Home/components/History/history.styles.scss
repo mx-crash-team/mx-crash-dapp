@@ -1,0 +1,45 @@
+.history {
+  // reduce row height for history table
+  .table-component {
+    // override default min-width to fit mobile
+    min-width: auto;
+    th,
+    td {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      margin-bottom: 1rem;
+      .user {
+        padding-left: 0.5rem;
+        font-size: 0.825rem;
+      }
+      .message {
+        background-color: var(--primary);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        color: var(--body-color);
+      }
+    }
+  }
+  }
+  // responsiveness tweaks
+  @media (max-width: 576px) {
+    .table-responsive {
+      overflow-x: auto;
+    }
+    .table-component {
+      min-width: auto !important;
+      th,
+      td {
+        padding: 0.25rem !important;
+        font-size: 0.75rem !important;
+      }
+    }
+  }

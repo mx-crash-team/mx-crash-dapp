@@ -1,16 +1,25 @@
-import { Chart, Interface, Table } from './components';
+import { Chart, History, Interface, Table } from './components';
 
 export const Home = () => {
   return (
     <div className='home d-flex justify-content-center flex-fill'>
-      <div className='container d-flex flex-column flex-grow-1'>
-        <div className='row flex-grow-1 mb-spacer'>
-          <div className='col-8 flex-grow-1 d-flex flex-column gap-4'>
+      <div className='container d-flex flex-column'>
+        <div className='row mb-spacer3'>
+          <div className='col-12'>
             <Chart />
-            <Table />
           </div>
-          <div className='col-4 flex-grow-1'>
+          <div className='col-12 mt-3'>
             <Interface />
+          </div>
+          <div className='col-12 mt-3'>
+            <div className='row g-3'>
+              <div className='col-6'>
+                <Table />
+              </div>
+              <div className='col-6'>
+                <History />
+              </div>
+            </div>
           </div>
         </div>
       </div>

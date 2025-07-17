@@ -1,11 +1,6 @@
 @import './components/AccountImage/accountImage.styles.scss';
 
 .account {
-  .account-winners-countdown {
-    .tickets-wrapper {
-      display: none !important;
-    }
-  }
   .address-holder-container {
     background-color: $body-bg;
 
@@ -33,23 +28,9 @@
     }
   }
 
-  .account-details-card-body {
-    background-color: $body-bg;
-  }
-
-  .tokens-section-loader {
-    @extend .p-2 !optional;
-  }
-
-  .kyc-section {
-    strong {
-      text-align: left;
-    }
-    .signup-status {
-      .btn {
-        margin-top: -24px;
-      }
-    }
+  .wallet-overview-token-list {
+    max-height: 18rem;
+    overflow-y: scroll;
   }
 
   .token-row .token-icon {
@@ -59,35 +40,5 @@
     max-height: 2rem;
     border-radius: 50%;
     border: 1px solid var(--neutral-800);
-  }
-
-  .announcement-timeline {
-    .btn-timeline-collapse {
-      --btn-padding-y: 0.5rem;
-    }
-    .rah-animating,
-    .rah-static--height-specific {
-      &:after {
-        background: linear-gradient(
-          180deg,
-          rgba(var(--card-bg-rgb), 0) 0%,
-          rgba(var(--card-bg-rgb), 100) 100%
-        );
-      }
-    }
-    .timeline-wrapper {
-      font-size: 0.925rem;
-    }
-  }
-
-  .btn-initial-claim {
-    margin-left: auto;
-    margin-right: auto;
-    --btn-padding-x: 3.5rem;
-  }
-
-  .project-image {
-    border-radius: 1.5rem;
-    overflow: hidden;
   }
 }

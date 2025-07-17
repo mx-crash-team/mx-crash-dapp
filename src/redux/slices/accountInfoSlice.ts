@@ -6,7 +6,8 @@ const initialState: AccountStateType = {
   websocketEvent: null,
   websocketStatus: null,
   websocketNewBets: null,
-  websocketChat: null
+  websocketChat: null,
+  websocketHistory: null
 };
 
 export const accountInfoSlice = createSlice({
@@ -54,6 +55,12 @@ export const accountInfoSlice = createSlice({
         timestamp: Date.now(),
         data: action.payload
       };
+    },
+    setWebsocketHistory: (state: AccountStateType, action: PayloadAction<any>) => {
+      state.websocketHistory = {
+        timestamp: Date.now(),
+        data:action.payload
+      };
     }
   }
 });
@@ -64,7 +71,8 @@ export const {
   setWebsocketEvent,
   setWebsocketStatus,
   setWebsocketNewBets,
-  setWebsocketChat
+  setWebsocketChat,
+  setWebsocketHistory
 } = accountInfoSlice.actions;
 
 export default accountInfoSlice.reducer;

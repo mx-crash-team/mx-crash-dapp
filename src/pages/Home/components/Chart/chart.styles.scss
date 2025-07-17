@@ -1,10 +1,11 @@
 @import './rocketAnimation.styles.scss';
 
 .chart {
-  border-radius: $card-border-radius;
+  border-radius: 0.5rem;
   font-family: $headings-font-family;
   position: relative;
   overflow-x: hidden;
+  min-height: 300px;
   max-height: 50rem;
 
   .chart-particles {
@@ -12,7 +13,7 @@
       height: 100%;
       .particles-background {
         background-color: var(--neutral-950);
-        border-radius: $card-border-radius;
+        border-radius: 0.5rem;
         position: absolute;
         top: 0;
         right: 0;
@@ -32,6 +33,10 @@
     justify-content: center;
     overflow: hidden;
     h2 {
+      position: relative;
+      z-index: 1;
+      /* move status text upward */
+      transform: translateY(-20px);
       display: flex;
       align-items: center;
       font-weight: 800;

@@ -8,7 +8,8 @@ import { websocketUrl } from 'config';
 import {
   setWebsocketEvent,
   setWebsocketStatus,
-  setWebsocketNewBets
+  setWebsocketNewBets,
+  setWebsocketHistory
 } from 'redux/slices';
 
 import {
@@ -45,6 +46,10 @@ export function useInitializeWebsocketConnection() {
         case 'onNewBets':
           dispatch(setWebsocketNewBets({ message, data }));
           return;
+        case 'onHistory':
+        case 'onComputePrizes':
+          dispatch(setWebsocketHistory({ message, data }));
+          return;
         default:
           dispatch(setWebsocketEvent({ message, data }));
       }
@@ -68,8 +73,6 @@ export function useInitializeWebsocketConnection() {
           return;
         }
 
-        // If there are many components that use this hook, the initialize method is triggered many times.
-        // To avoid multiple connections to the same endpoint, we have to guard the initialization before the logic started
         websocketConnection.status = WebsocketConnectionStatusEnum.PENDING;
 
         if (websocketUrl == null) {
@@ -97,12 +100,10 @@ export function useInitializeWebsocketConnection() {
 
         websocketConnection.current.on(DISCONNECT, () => {
           if (address) {
-            // Make sure we are still logged in before retrying to connect to the websocket
             console.warn('Websocket disconnected. Trying to reconnect..!');
 
             setTimeout(() => {
               if (address) {
-                // Make sure we are still logged in when the timeout is finished
                 console.log('Websocket reconnecting..!');
                 websocketConnection.current?.connect();
               }
@@ -130,7 +131,6 @@ export function useInitializeWebsocketConnection() {
     }
 
     if (!address) {
-      // Close the websocket connection when we are not logged in
       unsubscribeWS();
     }
   }, [address, initializeWebsocketConnection]);
