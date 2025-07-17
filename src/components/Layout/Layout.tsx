@@ -9,10 +9,8 @@ import {
   useSetUserAgent,
   useIsAuthenticated
 } from 'hooks';
-import { useWebsocketLog } from 'hooks/websocketListener';
 import routes, { routeNames } from 'routes';
 
-import { Footer } from './Footer';
 import { HeaderNew } from './HeaderNew';
 import { useBgPage } from './useBgPage';
 
@@ -25,9 +23,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const logout = useLogout({ shouldAttemptReLogin: false });
 
   const { search } = location;
-
-  // Authenticated
-  // useFetchUserInfo();
 
   useFetchUsdValue();
 
@@ -67,7 +62,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           </AuthenticatedRoutesWrapper>
         </>
       </main>
-      <Footer />
     </div>
   );
 };
