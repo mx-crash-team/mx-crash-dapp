@@ -17,7 +17,7 @@ export const useSendBetTransaction = () => {
   const sendBetTransactionFromAbi = useCallback(
     async ({ amount, cash_out, callbackRoute }: any) => {
       const betTransaction = smartContract.methodsExplicit
-        .submitBet([...(cash_out ? [new U32Value(cash_out)] : [])])
+        .submitBet([...(Math.round(cash_out) ? [new U32Value(cash_out)] : [])])
         .withSender(new Address(address))
         .withValue(TokenTransfer.egldFromAmount(amount ?? '0'))
         .withGasLimit(SC_GAS_LIMIT)
