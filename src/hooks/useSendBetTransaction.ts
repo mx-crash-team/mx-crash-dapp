@@ -7,7 +7,7 @@ import { getChainId, signAndSendTransactions, smartContract } from 'helpers';
 
 const BET_TRANSACTION_INFO = {
   processingMessage: 'Processing Bet transaction',
-  errorMessage: 'An error has occured during Bet',
+  errorMessage: 'An error has occurred during Bet',
   successMessage: 'Bet transaction successful'
 };
 
