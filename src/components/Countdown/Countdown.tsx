@@ -25,7 +25,9 @@ export const Countdown = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const myInterval = setInterval(() => {
+    let myInterval: NodeJS.Timeout;
+    
+    const updateCountdown = () => {
       const currentTime = moment.utc();
       const currentDiffDays = moment.duration(genesis.diff(currentTime));
 
@@ -38,12 +40,16 @@ export const Countdown = ({
         //dispatch(updateRefetch());
         clearInterval(myInterval);
       }
-    }, 1000);
-    if (myInterval)
-      return () => {
-        clearInterval(myInterval);
-      };
-  });
+    };
+
+    // Update immediately, then set interval
+    updateCountdown();
+    myInterval = setInterval(updateCountdown, 1000);
+    
+    return () => {
+      clearInterval(myInterval);
+    };
+  }, [genesis]);
 
   return (
     <div className={`${className} d-flex flex-column`}>
