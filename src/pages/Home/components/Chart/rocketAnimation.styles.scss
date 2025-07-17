@@ -10,6 +10,9 @@ $darkred: var(--primary);
   top: 20%;
   width: 80px;
   left: calc(50% - 40px);
+  transform: scale(0.5);
+  transform-origin: center top;
+  z-index: 0;
   .rocket-body {
     width: 80px;
     left: calc(50% - 50px);

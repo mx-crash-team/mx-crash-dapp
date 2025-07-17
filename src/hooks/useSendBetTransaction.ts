@@ -7,7 +7,7 @@ import { getChainId, signAndSendTransactions, smartContract } from 'helpers';
 
 const BET_TRANSACTION_INFO = {
   processingMessage: 'Processing Bet transaction',
-  errorMessage: 'An error has occured during Bet',
+  errorMessage: 'An error has occurred during Bet',
   successMessage: 'Bet transaction successful'
 };
 
@@ -17,7 +17,7 @@ export const useSendBetTransaction = () => {
   const sendBetTransactionFromAbi = useCallback(
     async ({ amount, cash_out, callbackRoute }: any) => {
       const betTransaction = smartContract.methodsExplicit
-        .submitBet([...(cash_out ? [new U32Value(cash_out)] : [])])
+        .submitBet([...(cash_out ? [new U32Value(Math.round(cash_out))] : [])])
         .withSender(new Address(address))
         .withValue(TokenTransfer.egldFromAmount(amount ?? '0'))
         .withGasLimit(SC_GAS_LIMIT)

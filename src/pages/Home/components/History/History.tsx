@@ -99,6 +99,19 @@ useRegisterWebsocketStatusListener(onStatusMessage);
 
   return (
     <section className='history border shadow-sm rounded'>
+      <div className='p-3'>
+        <h3
+          className='m-0 fs-5'
+          style={{
+            backgroundImage: 'linear-gradient(135deg, #ffffff 0%, #da4453 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent'
+          }}
+        >
+          Winners History
+        </h3>
+      </div>
       <div className='table-responsive'>
         <table className='table table-striped table-component'>
           <thead className='thead-light'>
@@ -108,7 +121,7 @@ useRegisterWebsocketStatusListener(onStatusMessage);
               <th>Prize</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='text-center'>
             {history
               .filter(entry => entry.address && entry.bet != null && entry.cash_out != null)
               .map(({ address, cash_out, bet }, index) => {
